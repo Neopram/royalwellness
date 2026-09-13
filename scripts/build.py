@@ -181,10 +181,10 @@ nav a.on{color:var(--g);border-bottom-color:var(--g)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;padding:10px 0 90px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(35,35,35,.04);padding:14px;display:flex;flex-direction:column}
 .card.out{opacity:.55}
-.ph{position:relative;height:120px;border-radius:10px;background:linear-gradient(150deg,#f2efe8,#dfe6da);display:grid;place-items:center;margin-bottom:10px}
-.ph-t{font-size:32px;font-weight:700;color:var(--g);opacity:.42;letter-spacing:1px}
+.ph{position:relative;height:180px;border-radius:10px;background:linear-gradient(150deg,#f2efe8,#dfe6da);display:grid;place-items:center;margin-bottom:10px}
+.ph-t{font-size:36px;font-weight:700;color:var(--g);opacity:.42;letter-spacing:1px}
 .ph.has-img{background:#fff;overflow:hidden}
-.ph.has-img img{width:100%;height:100%;object-fit:contain;display:block}
+.ph.has-img img{width:100%;height:100%;object-fit:contain;display:block;padding:6px}
 .badge{position:absolute;top:8px;left:8px;background:#a4483c;color:#fff;font-size:11px;padding:3px 8px;border-radius:6px}
 .card h3{font-size:15px;line-height:1.35;margin-bottom:5px}
 .desc{font-size:13px;color:var(--mut);flex:1;margin-bottom:10px}
@@ -415,6 +415,7 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
 #cw-btn{{position:fixed;bottom:22px;right:22px;width:52px;height:52px;background:var(--g);color:#fff;border-radius:50%;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 14px rgba(90,115,86,.45);z-index:1001;display:flex;align-items:center;justify-content:center;transition:transform .15s}}
 #cw-btn:hover{{transform:scale(1.09)}}
 #cw-panel{{position:fixed;bottom:84px;right:22px;width:320px;max-height:460px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);display:flex;flex-direction:column;z-index:1000;overflow:hidden}}
+#cw-panel[hidden]{{display:none!important}}
 #cw-head{{background:var(--g);color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px}}
 #cw-x{{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0;line-height:1}}
 #cw-msgs{{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:120px}}
@@ -431,9 +432,9 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
 #cw-go{{background:var(--g);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;flex-shrink:0}}
 @media(max-width:380px){{#cw-panel{{width:calc(100vw - 20px);right:10px}}}}
 </style>
-<button id="cw-btn" aria-label="Βοήθεια">💬</button>
+<button id="cw-btn" type="button" aria-label="Βοήθεια">💬</button>
 <div id="cw-panel" hidden>
-  <div id="cw-head">Royal Wellness — Βοήθεια<button id="cw-x">×</button></div>
+  <div id="cw-head">Royal Wellness — Βοήθεια<button id="cw-x" type="button">×</button></div>
   <div id="cw-msgs"></div>
   <div id="cw-chips">
     <button class="cw-chip">Αποστολή</button>
