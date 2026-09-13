@@ -159,11 +159,12 @@ CSS = """
 html{background:var(--bg)}
 body{font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,sans-serif;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
 h1,h2,h3,h4,.big,.price,.ph-t{font-family:var(--tit)}
-header{background:linear-gradient(160deg,#fbfaf7,var(--bg));border-bottom:1px solid var(--line);color:var(--ink);padding:26px 18px 24px;text-align:center}
-header h1{font-size:26px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase}
-header h1 a{color:var(--ink);text-decoration:none}
-header p{color:var(--mut);font-size:13.5px;margin-top:7px;letter-spacing:.3px}
-header .rule{width:52px;height:2px;background:var(--g2);margin:14px auto 0;border-radius:2px}
+header{background:#1e2221;border-bottom:1px solid #333;color:#f8f6f2;padding:18px 18px 16px;text-align:center}
+header h1{font-size:0;margin:0;line-height:0}
+header h1 a{display:inline-block;line-height:0}
+header .logo-img{height:54px;max-width:220px;object-fit:contain}
+header p{color:#9faf9c;font-size:12px;margin-top:8px;letter-spacing:.6px;text-transform:uppercase}
+header .rule{width:44px;height:1px;background:#9faf9c;margin:10px auto 0;opacity:.7}
 nav{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
 nav ul{display:flex;flex-wrap:wrap;justify-content:center;gap:0 2px;list-style:none;max-width:1040px;margin:0 auto;padding:0 6px}
 nav a{display:block;padding:12px 13px;color:var(--mut);text-decoration:none;font-size:13.5px;font-weight:600;white-space:nowrap;border-bottom:2px solid transparent}
@@ -388,7 +389,7 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
 </head>
 <body>
 <header>
-  <h1><a href="index.html">{html.escape(t["nombre"])}</a></h1>
+  <h1><a href="index.html"><img class="logo-img" src="assets/logo-white.png" alt="{html.escape(t["nombre"])}"></a></h1>
   <p>Herbalife Nutrition · {html.escape(t["consultora"])}</p>
   <div class="rule"></div>
 </header>
