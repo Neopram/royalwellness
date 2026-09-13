@@ -30,6 +30,9 @@
   },
   "pago": {
     "_": "Metodos que se ofrecen en el carrito y se listan en la pagina legal.",
+    "iris": true,
+    "iris_id": "PENDIENTE",
+    "_iris": "IRIS (DIAS): pago instantaneo por movil. OBLIGATORIO para e-shops griegos desde 1/12/2025. Gratis para el cliente, comision minima para ti, dinero en segundos. Requiere ALTA con AFM. El iris_id es tu movil o AFM dado de alta en IRIS.",
     "antikatavoli": true,
     "antikatavoli_coste": 2.00,
     "_antikatavoli": "Contra reembolso. En Grecia sigue siendo mayoritario y NO necesita pasarela ni cuenta de empresa. Pon el coste a 0 si no quieres cobrar recargo.",

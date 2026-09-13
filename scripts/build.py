@@ -70,6 +70,9 @@ def validar(data):
             avisos.append("miembro.url_registro sin rellenar -> pega tu enlace de alta "
                           "de MyHerbalife")
 
+    if pago.get("iris") and pago.get("iris_id") in PENDIENTE:
+        avisos.append("pago.iris=true pero iris_id esta vacio -> el cliente no sabra "
+                      "a quien pagar. IRIS exige alta con AFM")
     if pago.get("transferencia") and pago.get("iban") in PENDIENTE:
         avisos.append("pago.transferencia=true pero el IBAN esta vacio -> quita la opcion "
                       "o pon el IBAN")
@@ -303,6 +306,9 @@ def pagina_tienda(data):
 
     # Metodos de pago ofrecidos en el carrito
     opciones = []
+    if pago.get("iris"):
+        opciones.append(('iris', 'IRIS άμεση πληρωμή',
+                         ' <small>(άμεσα, χωρίς χρέωση για εσάς)</small>', 0))
     if pago.get("antikatavoli"):
         rec = pago.get("antikatavoli_coste", 0) or 0
         extra = (f" <small>(+{rec:.2f} {sim})</small>".replace(".", ",") if rec else
@@ -511,6 +517,10 @@ def pagina_legal(data):
     pago = data.get("pago", {})
 
     metodos = []
+    if pago.get("iris"):
+        metodos.append(f"<li><b>IRIS άμεση πληρωμή</b> — άμεση μεταφορά από την "
+                       f"τραπεζική σας εφαρμογή, χωρίς χρέωση για εσάς. "
+                       f"Στοιχείο λήπτη: {f(pago.get('iris_id'))}.</li>")
     if pago.get("antikatavoli"):
         rec = pago.get("antikatavoli_coste", 0) or 0
         metodos.append("<li><b>Αντικαταβολή</b> — πληρωμή με την παράδοση, μόνο εντός Ελλάδας"
