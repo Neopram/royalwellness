@@ -212,6 +212,22 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 .legal ul{padding-left:20px}
 .legal .falta{background:#ffe9e6;color:#8c1d12;border-radius:5px;padding:1px 7px;font-weight:700;font-size:13px}
 @media(prefers-color-scheme:dark){.legal .falta{background:#3d1713;color:#ff9d8f}}
+.pieancho{background:var(--card);border-top:1px solid var(--line);padding:30px 18px 4px}
+.pw{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px}
+.pw h4{font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+.pw p{font-size:13px;color:var(--mut);margin-bottom:6px}
+.pw a{color:var(--mut);text-decoration:none}
+.pw a:hover{color:var(--g);text-decoration:underline}
+.pb{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-size:11px;margin:0 5px 5px 0;color:var(--ink)}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;margin-bottom:9px;overflow:hidden}
+.faq summary{padding:15px 16px;cursor:pointer;font-weight:600;font-size:15px;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--g);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"\\2212"}
+.faq .a{padding:0 16px 15px;font-size:14px;color:var(--mut)}
+.ficha{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.ficha h3{font-size:16px;margin-bottom:8px;color:var(--g)}
+.ficha p{font-size:14px;color:var(--mut);margin-bottom:8px}
 footer{background:var(--card);border-top:1px solid var(--line);padding:26px 18px 110px;text-align:center;font-size:12px;color:var(--mut)}
 footer a{color:var(--g)}
 .legalpie{max-width:640px;margin:12px auto 0;line-height:1.7}
@@ -221,10 +237,80 @@ footer a{color:var(--g)}
 def nav(activa):
     it = [("index.html", "Κατάλογος", "tienda"),
           ("melos.html", "Γίνε Μέλος", "melos"),
-          ("nomika.html", "Πληροφορίες", "legal")]
+          ("eukairia.html", "Επαγγελματική Ευκαιρία", "eukairia"),
+          ("faq.html", "Συχνές Ερωτήσεις", "faq"),
+          ("epikoinonia.html", "Επικοινωνία", "contacto"),
+          ("nomika.html", "Πολιτικές", "legal")]
     return ("<nav><ul>" + "".join(
         f'<li><a href="{h}"{" class=\"on\"" if k == activa else ""}>{n}</a></li>'
         for h, n, k in it) + "</ul></nav>")
+
+
+def pie_ancho(t):
+    """Pie de pagina ancho, con las 4 columnas de informacion."""
+    soc = []
+    for k, n, u in (("instagram", "Instagram", "https://instagram.com/"),
+                    ("tiktok", "TikTok", "https://tiktok.com/@"),
+                    ("facebook", "Facebook", "https://facebook.com/")):
+        v = t.get(k)
+        if v and v not in PENDIENTE:
+            soc.append(f'<a href="{u}{html.escape(v.lstrip("@"))}" target="_blank" rel="noopener">{n}</a>')
+    soc_html = " · ".join(soc) if soc else '<span style="opacity:.5">—</span>'
+
+    def d(campo, pre=""):
+        v = t.get(campo)
+        return (pre + html.escape(str(v))) if v and v not in PENDIENTE else \
+               '<span style="opacity:.45">—</span>'
+
+    return f"""
+<div class="pieancho">
+  <div class="pw">
+    <div>
+      <h4>Επικοινωνία</h4>
+      <p>{d("horario")}</p>
+      <p>{d("direccion")}</p>
+      <p>{d("telefono_publico")}</p>
+      <p><a href="mailto:{html.escape(t["email"])}">{html.escape(t["email"])}</a></p>
+    </div>
+    <div>
+      <h4>Πληροφορίες</h4>
+      <p><a href="melos.html">Γίνε Μέλος</a></p>
+      <p><a href="eukairia.html">Επαγγελματική Ευκαιρία</a></p>
+      <p><a href="faq.html">Συχνές Ερωτήσεις</a></p>
+      <p><a href="epikoinonia.html">Ποιοι Είμαστε</a></p>
+      <p><a href="epikoinonia.html#tracking">Παρακολούθηση Παραγγελίας</a></p>
+    </div>
+    <div>
+      <h4>Πολιτικές Καταστήματος</h4>
+      <p><a href="nomika.html#pliromes">Πολιτική Πληρωμών</a></p>
+      <p><a href="nomika.html#apostoli">Πολιτική Αποστολής</a></p>
+      <p><a href="nomika.html#epistrofes">Πολιτική Επιστροφών</a></p>
+      <p><a href="nomika.html#oroi">Όροι Χρήσης</a></p>
+      <p><a href="nomika.html#aporrito">Πολιτική Απορρήτου</a></p>
+      <p><a href="nomika.html#apopoiisi">Αποποίηση Ευθυνών</a></p>
+    </div>
+    <div>
+      <h4>Ακολουθήστε μας</h4>
+      <p>{soc_html}</p>
+      <h4 style="margin-top:16px">Τρόποι Πληρωμής</h4>
+      <p class="pagoslogo">{pagos_badges(t)}</p>
+    </div>
+  </div>
+</div>"""
+
+
+def pagos_badges(t):
+    p = t.get("_pago", {}) or {}
+    b = []
+    if p.get("iris"):
+        b.append("IRIS")
+    if p.get("antikatavoli"):
+        b.append("Αντικαταβολή")
+    if p.get("transferencia"):
+        b.append("Τραπεζική κατάθεση")
+    if p.get("efectivo"):
+        b.append("Μετρητά")
+    return "".join(f'<span class="pb">{x}</span>' for x in b) or "—"
 
 
 def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
@@ -247,6 +333,7 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
 </header>
 {nav(activa)}
 {cuerpo}
+{pie_ancho(t)}
 <footer>
   <p><b>{html.escape(t["nombre"])}</b> · Ανεξάρτητο Μέλος Herbalife</p>
   <p>{html.escape(t["email"])} · ΓΕΜΗ: {gemi}</p>
@@ -254,8 +341,9 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
     <p>Τα προϊόντα Herbalife Nutrition δεν είναι φάρμακα και δεν προορίζονται για τη
     διάγνωση, θεραπεία ή πρόληψη ασθενειών. Τα αποτελέσματα διαφέρουν ανά άτομο.
     Συμβουλευτείτε τον γιατρό σας πριν από οποιοδήποτε πρόγραμμα διατροφής.</p>
-    <p><a href="nomika.html">Όροι &amp; Πληροφορίες</a> ·
-    Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994) ·
+    <p>Αυτή η ιστοσελίδα ανήκει σε Ανεξάρτητο Μέλος Herbalife και δεν ανήκει
+    στη Herbalife Nutrition Ltd ούτε τη δεσμεύει.</p>
+    <p>Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994) ·
     <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">Πλατφόρμα ΗΕΔ</a></p>
   </div>
   <p style="margin-top:14px;opacity:.6">&copy; {datetime.now().year} · Ενημερώθηκε {datetime.now().strftime("%d/%m/%Y %H:%M")}</p>
@@ -552,16 +640,16 @@ def pagina_legal(data):
   <p>Ανεξάρτητο Μέλος Herbalife. Το παρόν κατάστημα δεν ανήκει στη Herbalife
   Nutrition και δεν τη δεσμεύει.</p>
 
-  <h2>Τρόποι Πληρωμής</h2>
+  <h2 id="pliromes">Τρόποι Πληρωμής</h2>
   <ul>{"".join(metodos)}</ul>
 
-  <h2>Πολιτική Παράδοσης</h2>
+  <h2 id="apostoli">Πολιτική Παράδοσης</h2>
   <p>Αποστολή σε όλη την Ελλάδα με courier. Κόστος αποστολής
   {t["envio_coste"]:.2f} {sim}, δωρεάν για παραγγελίες άνω των
   {t["envio_gratis_desde"]:.2f} {sim}. Χρόνος παράδοσης 1–3 εργάσιμες ημέρες,
   ανάλογα με την περιοχή.</p>
 
-  <h2>Πολιτική Επιστροφών &amp; Υπαναχώρηση</h2>
+  <h2 id="epistrofes">Πολιτική Επιστροφών &amp; Υπαναχώρηση</h2>
   <p>Σύμφωνα με τον Ν. 2251/1994, έχετε δικαίωμα υπαναχώρησης εντός
   <b>14 ημερολογιακών ημερών</b> από την παραλαβή, χωρίς αιτιολόγηση.
   Τα προϊόντα πρέπει να επιστραφούν στην αρχική τους κατάσταση και συσκευασία,
@@ -569,7 +657,7 @@ def pagina_legal(data):
   είναι ελαττωματικό ή εστάλη εκ παραδρομής.</p>
   <p>Η επιστροφή χρημάτων γίνεται εντός 14 ημερών από την παραλαβή της επιστροφής.</p>
 
-  <h2>Πολιτική Απορρήτου (GDPR)</h2>
+  <h2 id="aporrito">Πολιτική Απορρήτου (GDPR)</h2>
   <p>Τα δεδομένα που μας δίνετε (όνομα, διεύθυνση, τηλέφωνο) χρησιμοποιούνται
   αποκλειστικά για την εκτέλεση της παραγγελίας σας και δεν διαβιβάζονται σε
   τρίτους, πέραν της εταιρείας courier.</p>
@@ -582,7 +670,7 @@ def pagina_legal(data):
   {html.escape(t["email"])}. Εποπτική αρχή: Αρχή Προστασίας Δεδομένων
   Προσωπικού Χαρακτήρα (www.dpa.gr).</p>
 
-  <h2>Όροι Χρήσης</h2>
+  <h2 id="oroi">Όροι Χρήσης</h2>
   <p>Οι τιμές περιλαμβάνουν ΦΠΑ. Διατηρούμε το δικαίωμα αλλαγής τιμών χωρίς
   προειδοποίηση· η τιμή που ισχύει είναι αυτή τη στιγμή της επιβεβαίωσης της
   παραγγελίας.</p>
@@ -603,13 +691,146 @@ def pagina_legal(data):
 
 # ---------------------------------------------------------------------------
 
+def pagina_faq(data):
+    t = data["tienda"]
+    items = data.get("faq", [])
+    cuerpo = '<div class="wrap faq" style="padding-bottom:70px">' \
+             '<h2 style="font-size:22px;margin:8px 0 16px">Συχνές Ερωτήσεις</h2>'
+    for it in items:
+        cuerpo += (f'<details><summary>{html.escape(it["q"])}</summary>'
+                   f'<div class="a">{it["a"]}</div></details>')
+    cuerpo += ('<p style="margin-top:24px;font-size:14px;color:var(--mut)">'
+               'Δεν βρήκες αυτό που έψαχνες; '
+               '<a href="epikoinonia.html" style="color:var(--g)">Γράψε μας</a>.</p></div>')
+    return shell(t, "Συχνές Ερωτήσεις | " + t["nombre"],
+                 "Απαντήσεις σε συχνές ερωτήσεις για τα προϊόντα Herbalife, "
+                 "τις παραγγελίες, την αποστολή και την ιδιότητα του Μέλους.",
+                 "faq", cuerpo)
+
+
+def pagina_contacto(data):
+    t = data["tienda"]
+
+    def d(c):
+        v = t.get(c)
+        return html.escape(str(v)) if v and v not in PENDIENTE else \
+               '<span class="falta">ΣΥΜΠΛΗΡΩΣΤΕ</span>'
+
+    wa = t["telefono_whatsapp"]
+    boton_wa = (f'<a class="btn big" href="https://wa.me/{wa}" target="_blank" rel="noopener">'
+                f'Γράψε μας στο WhatsApp</a>' if "X" not in wa else
+                '<button class="btn big" disabled>WhatsApp σύντομα διαθέσιμο</button>')
+
+    cuerpo = f"""
+<div class="wrap legal" style="padding-bottom:70px">
+  <h2 style="font-size:22px;margin:8px 0 14px">Ποιοι Είμαστε</h2>
+  <div class="ficha">
+    <h3>{html.escape(t["consultora"])}</h3>
+    <p>Ανεξάρτητο Μέλος Herbalife Nutrition. Δεν πουλάμε απλώς προϊόντα:
+    σχεδιάζουμε το πρόγραμμα μαζί, το προσαρμόζουμε στη ζωή σου και σε
+    παρακολουθούμε κάθε εβδομάδα. Αυτό είναι που δεν αγοράζεται από ένα ράφι.</p>
+    <p>Κάθε παραγγελία περνάει από εμάς προσωπικά. Δεν υπάρχει call center.</p>
+  </div>
+
+  <h2 style="font-size:22px;margin:26px 0 14px">Επικοινωνία</h2>
+  <div class="ficha">
+    <p><b>Ωράριο:</b> {d("horario")}</p>
+    <p><b>Διεύθυνση:</b> {d("direccion")}</p>
+    <p><b>Τηλέφωνο:</b> {d("telefono_publico")}</p>
+    <p><b>Email:</b> <a href="mailto:{html.escape(t["email"])}" style="color:var(--g)">{html.escape(t["email"])}</a></p>
+  </div>
+  <div style="text-align:center;margin:22px 0">{boton_wa}</div>
+
+  <h2 id="tracking" style="font-size:22px;margin:30px 0 14px">Παρακολούθηση Παραγγελίας</h2>
+  <div class="ficha">
+    <p>Μόλις σταλεί η παραγγελία σου, σου στέλνουμε τον αριθμό αποστολής
+    (voucher) στο WhatsApp. Με αυτόν μπορείς να δεις πού βρίσκεται το δέμα σου
+    απευθείας στην εταιρεία ταχυμεταφορών:</p>
+    <p>
+      <a href="https://www.acscourier.net/el/track-and-trace/" target="_blank" rel="noopener" style="color:var(--g)">ACS Courier</a> ·
+      <a href="https://www.elta-courier.gr/search" target="_blank" rel="noopener" style="color:var(--g)">ΕΛΤΑ Courier</a> ·
+      <a href="https://www.speedex.gr/isapohsi.asp" target="_blank" rel="noopener" style="color:var(--g)">Speedex</a> ·
+      <a href="https://www.geniki.gr/el/track-trace" target="_blank" rel="noopener" style="color:var(--g)">Γενική Ταχυδρομική</a>
+    </p>
+    <p>Αν δεν έλαβες voucher μέσα σε 2 εργάσιμες, γράψε μας.</p>
+  </div>
+</div>
+"""
+    return shell(t, "Επικοινωνία | " + t["nombre"],
+                 "Επικοινωνήστε μαζί μας. Ωράριο, διεύθυνση και παρακολούθηση παραγγελίας.",
+                 "contacto", cuerpo)
+
+
+def pagina_oportunidad(data):
+    t = data["tienda"]
+    mi = data.get("miembro", {})
+    wa = t["telefono_whatsapp"]
+    cta = (f'<a class="btn big" href="https://wa.me/{wa}?text='
+           f'{("Γεια σας! Θα ήθελα πληροφορίες για την επαγγελματική ευκαιρία Herbalife.").replace(" ", "%20")}"'
+           f' target="_blank" rel="noopener">Θέλω περισσότερες πληροφορίες</a>'
+           if "X" not in wa else
+           '<button class="btn big" disabled>Σύντομα διαθέσιμο</button>')
+
+    cuerpo = f"""
+<div class="wrap" style="padding-bottom:70px">
+  <div class="hero">
+    <div class="big" style="font-size:30px">Επαγγελματική Ευκαιρία</div>
+    <p>Δούλεψε με δικούς σου ρυθμούς, από όπου θέλεις,<br>
+    με μια εταιρεία που δραστηριοποιείται από το 1980.</p>
+  </div>
+
+  <h2 style="font-size:20px;margin:24px 0 10px">Τι σημαίνει στην πράξη</h2>
+  <div class="ficha">
+    <h3>Χωρίς υποχρεώσεις</h3>
+    <p>Δεν υπάρχει ελάχιστη παραγγελία, ούτε υποχρέωση αγοράς εργαλείων πώλησης,
+    ούτε στόχοι που πρέπει να πιάσεις.</p>
+  </div>
+  <div class="ficha">
+    <h3>Δικό σου ωράριο</h3>
+    <p>Μπορεί να είναι συμπληρωματικό εισόδημα δίπλα στη δουλειά σου, ή η κύρια
+    ασχολία σου. Εσύ αποφασίζεις πόσο χρόνο βάζεις.</p>
+  </div>
+  <div class="ficha">
+    <h3>Εκπαίδευση και ομάδα</h3>
+    <p>Δεν ξεκινάς μόνος. Υπάρχει εκπαίδευση, υλικό και μια ομάδα που έχει ήδη
+    περάσει από εκεί που είσαι τώρα.</p>
+  </div>
+  <div class="ficha">
+    <h3>Έκπτωση Μέλους από την πρώτη μέρα</h3>
+    <p>Ως Ανεξάρτητο Μέλος αγοράζεις τα προϊόντα με έκπτωση
+    {mi.get("descuento_min", 25)}% και άνω, είτε τα χρησιμοποιήσεις μόνος σου
+    είτε όχι. Δες τη σελίδα <a href="melos.html" style="color:var(--g)">Γίνε Μέλος</a>.</p>
+  </div>
+
+  <div style="text-align:center;margin:28px 0">{cta}</div>
+
+  <div class="avisobox">
+    <b>Σημαντική διευκρίνιση.</b> Η ιδιότητα του Ανεξάρτητου Μέλους
+    <b>δεν εγγυάται κανένα εισόδημα</b>. Τα αποτελέσματα εξαρτώνται από τη δουλειά
+    που θα κάνεις. Πριν πάρεις οποιαδήποτε απόφαση, διάβασε τη
+    <a href="https://www.herbalife.com/content/dam/global-reusable-assets/documents/pd-statement-typical-distributor-earnings-el-gr.pdf" target="_blank" rel="noopener">Δήλωση Τυπικών Κερδών</a>
+    που δημοσιεύει η ίδια η Herbalife. Δεν υποσχόμαστε ποσά και δεν θα σου
+    ζητήσουμε να αγοράσεις απόθεμα.
+  </div>
+</div>
+"""
+    return shell(t, "Επαγγελματική Ευκαιρία | " + t["nombre"],
+                 "Η επαγγελματική ευκαιρία Herbalife: πώς λειτουργεί, χωρίς υποσχέσεις.",
+                 "eukairia", cuerpo)
+
+
 def construir(data):
     t = data["tienda"]
+    # el pie necesita saber que metodos de pago hay activos
+    t["_pago"] = data.get("pago", {})
     SITE.mkdir(parents=True, exist_ok=True)
 
     tienda_html, n, con_foto = pagina_tienda(data)
     (SITE / "index.html").write_text(tienda_html, encoding="utf-8")
     (SITE / "melos.html").write_text(pagina_melos(data), encoding="utf-8")
+    (SITE / "eukairia.html").write_text(pagina_oportunidad(data), encoding="utf-8")
+    (SITE / "faq.html").write_text(pagina_faq(data), encoding="utf-8")
+    (SITE / "epikoinonia.html").write_text(pagina_contacto(data), encoding="utf-8")
     (SITE / "nomika.html").write_text(pagina_legal(data), encoding="utf-8")
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
 

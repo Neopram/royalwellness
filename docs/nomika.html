@@ -77,6 +77,22 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 .legal ul{padding-left:20px}
 .legal .falta{background:#ffe9e6;color:#8c1d12;border-radius:5px;padding:1px 7px;font-weight:700;font-size:13px}
 @media(prefers-color-scheme:dark){.legal .falta{background:#3d1713;color:#ff9d8f}}
+.pieancho{background:var(--card);border-top:1px solid var(--line);padding:30px 18px 4px}
+.pw{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px}
+.pw h4{font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+.pw p{font-size:13px;color:var(--mut);margin-bottom:6px}
+.pw a{color:var(--mut);text-decoration:none}
+.pw a:hover{color:var(--g);text-decoration:underline}
+.pb{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-size:11px;margin:0 5px 5px 0;color:var(--ink)}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;margin-bottom:9px;overflow:hidden}
+.faq summary{padding:15px 16px;cursor:pointer;font-weight:600;font-size:15px;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--g);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"\2212"}
+.faq .a{padding:0 16px 15px;font-size:14px;color:var(--mut)}
+.ficha{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.ficha h3{font-size:16px;margin-bottom:8px;color:var(--g)}
+.ficha p{font-size:14px;color:var(--mut);margin-bottom:8px}
 footer{background:var(--card);border-top:1px solid var(--line);padding:26px 18px 110px;text-align:center;font-size:12px;color:var(--mut)}
 footer a{color:var(--g)}
 .legalpie{max-width:640px;margin:12px auto 0;line-height:1.7}
@@ -87,7 +103,7 @@ footer a{color:var(--g)}
   <h1><a href="index.html">Royal Wellness</a></h1>
   <p>Herbalife Nutrition · Βασιλική Ανδρουτσοπούλου</p>
 </header>
-<nav><ul><li><a href="index.html">Κατάλογος</a></li><li><a href="melos.html">Γίνε Μέλος</a></li><li><a href="nomika.html" class="on">Πληροφορίες</a></li></ul></nav>
+<nav><ul><li><a href="index.html">Κατάλογος</a></li><li><a href="melos.html">Γίνε Μέλος</a></li><li><a href="eukairia.html">Επαγγελματική Ευκαιρία</a></li><li><a href="faq.html">Συχνές Ερωτήσεις</a></li><li><a href="epikoinonia.html">Επικοινωνία</a></li><li><a href="nomika.html" class="on">Πολιτικές</a></li></ul></nav>
 
 <div class="wrap legal" style="padding-bottom:70px">
   <div class="avisobox"><b>⚠ ΠΡΟΣΧΕΔΙΟ.</b> Αυτό το κείμενο είναι πρότυπο και
@@ -106,16 +122,16 @@ footer a{color:var(--g)}
   <p>Ανεξάρτητο Μέλος Herbalife. Το παρόν κατάστημα δεν ανήκει στη Herbalife
   Nutrition και δεν τη δεσμεύει.</p>
 
-  <h2>Τρόποι Πληρωμής</h2>
+  <h2 id="pliromes">Τρόποι Πληρωμής</h2>
   <ul><li><b>IRIS άμεση πληρωμή</b> — άμεση μεταφορά από την τραπεζική σας εφαρμογή, χωρίς χρέωση για εσάς. Στοιχείο λήπτη: <span class="falta">ΣΥΜΠΛΗΡΩΣΤΕ</span>.</li><li><b>Αντικαταβολή</b> — πληρωμή με την παράδοση, μόνο εντός Ελλάδας (επιβάρυνση 2,00 €).</li><li><b>Τραπεζική κατάθεση</b> — <span class="falta">ΣΥΜΠΛΗΡΩΣΤΕ</span>, IBAN <span class="falta">ΣΥΜΠΛΗΡΩΣΤΕ</span>, δικαιούχος <span class="falta">ΣΥΜΠΛΗΡΩΣΤΕ</span>.</li><li><b>Μετρητά</b> — με παράδοση στο χέρι, κατόπιν συνεννόησης.</li></ul>
 
-  <h2>Πολιτική Παράδοσης</h2>
+  <h2 id="apostoli">Πολιτική Παράδοσης</h2>
   <p>Αποστολή σε όλη την Ελλάδα με courier. Κόστος αποστολής
   3.50 €, δωρεάν για παραγγελίες άνω των
   60.00 €. Χρόνος παράδοσης 1–3 εργάσιμες ημέρες,
   ανάλογα με την περιοχή.</p>
 
-  <h2>Πολιτική Επιστροφών &amp; Υπαναχώρηση</h2>
+  <h2 id="epistrofes">Πολιτική Επιστροφών &amp; Υπαναχώρηση</h2>
   <p>Σύμφωνα με τον Ν. 2251/1994, έχετε δικαίωμα υπαναχώρησης εντός
   <b>14 ημερολογιακών ημερών</b> από την παραλαβή, χωρίς αιτιολόγηση.
   Τα προϊόντα πρέπει να επιστραφούν στην αρχική τους κατάσταση και συσκευασία,
@@ -123,7 +139,7 @@ footer a{color:var(--g)}
   είναι ελαττωματικό ή εστάλη εκ παραδρομής.</p>
   <p>Η επιστροφή χρημάτων γίνεται εντός 14 ημερών από την παραλαβή της επιστροφής.</p>
 
-  <h2>Πολιτική Απορρήτου (GDPR)</h2>
+  <h2 id="aporrito">Πολιτική Απορρήτου (GDPR)</h2>
   <p>Τα δεδομένα που μας δίνετε (όνομα, διεύθυνση, τηλέφωνο) χρησιμοποιούνται
   αποκλειστικά για την εκτέλεση της παραγγελίας σας και δεν διαβιβάζονται σε
   τρίτους, πέραν της εταιρείας courier.</p>
@@ -136,7 +152,7 @@ footer a{color:var(--g)}
   dravasi20@gmail.com. Εποπτική αρχή: Αρχή Προστασίας Δεδομένων
   Προσωπικού Χαρακτήρα (www.dpa.gr).</p>
 
-  <h2>Όροι Χρήσης</h2>
+  <h2 id="oroi">Όροι Χρήσης</h2>
   <p>Οι τιμές περιλαμβάνουν ΦΠΑ. Διατηρούμε το δικαίωμα αλλαγής τιμών χωρίς
   προειδοποίηση· η τιμή που ισχύει είναι αυτή τη στιγμή της επιβεβαίωσης της
   παραγγελίας.</p>
@@ -150,6 +166,41 @@ footer a{color:var(--g)}
   <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a></p>
 </div>
 
+
+<div class="pieancho">
+  <div class="pw">
+    <div>
+      <h4>Επικοινωνία</h4>
+      <p>Δευτέρα έως Κυριακή, 9:00 — 21:00</p>
+      <p><span style="opacity:.45">—</span></p>
+      <p><span style="opacity:.45">—</span></p>
+      <p><a href="mailto:dravasi20@gmail.com">dravasi20@gmail.com</a></p>
+    </div>
+    <div>
+      <h4>Πληροφορίες</h4>
+      <p><a href="melos.html">Γίνε Μέλος</a></p>
+      <p><a href="eukairia.html">Επαγγελματική Ευκαιρία</a></p>
+      <p><a href="faq.html">Συχνές Ερωτήσεις</a></p>
+      <p><a href="epikoinonia.html">Ποιοι Είμαστε</a></p>
+      <p><a href="epikoinonia.html#tracking">Παρακολούθηση Παραγγελίας</a></p>
+    </div>
+    <div>
+      <h4>Πολιτικές Καταστήματος</h4>
+      <p><a href="nomika.html#pliromes">Πολιτική Πληρωμών</a></p>
+      <p><a href="nomika.html#apostoli">Πολιτική Αποστολής</a></p>
+      <p><a href="nomika.html#epistrofes">Πολιτική Επιστροφών</a></p>
+      <p><a href="nomika.html#oroi">Όροι Χρήσης</a></p>
+      <p><a href="nomika.html#aporrito">Πολιτική Απορρήτου</a></p>
+      <p><a href="nomika.html#apopoiisi">Αποποίηση Ευθυνών</a></p>
+    </div>
+    <div>
+      <h4>Ακολουθήστε μας</h4>
+      <p><span style="opacity:.5">—</span></p>
+      <h4 style="margin-top:16px">Τρόποι Πληρωμής</h4>
+      <p class="pagoslogo"><span class="pb">IRIS</span><span class="pb">Αντικαταβολή</span><span class="pb">Τραπεζική κατάθεση</span><span class="pb">Μετρητά</span></p>
+    </div>
+  </div>
+</div>
 <footer>
   <p><b>Royal Wellness</b> · Ανεξάρτητο Μέλος Herbalife</p>
   <p>dravasi20@gmail.com · ΓΕΜΗ: PENDIENTE</p>
@@ -157,11 +208,12 @@ footer a{color:var(--g)}
     <p>Τα προϊόντα Herbalife Nutrition δεν είναι φάρμακα και δεν προορίζονται για τη
     διάγνωση, θεραπεία ή πρόληψη ασθενειών. Τα αποτελέσματα διαφέρουν ανά άτομο.
     Συμβουλευτείτε τον γιατρό σας πριν από οποιοδήποτε πρόγραμμα διατροφής.</p>
-    <p><a href="nomika.html">Όροι &amp; Πληροφορίες</a> ·
-    Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994) ·
+    <p>Αυτή η ιστοσελίδα ανήκει σε Ανεξάρτητο Μέλος Herbalife και δεν ανήκει
+    στη Herbalife Nutrition Ltd ούτε τη δεσμεύει.</p>
+    <p>Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994) ·
     <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">Πλατφόρμα ΗΕΔ</a></p>
   </div>
-  <p style="margin-top:14px;opacity:.6">&copy; 2026 · Ενημερώθηκε 13/09/2026 18:19</p>
+  <p style="margin-top:14px;opacity:.6">&copy; 2026 · Ενημερώθηκε 13/09/2026 18:31</p>
 </footer>
 
 </body>

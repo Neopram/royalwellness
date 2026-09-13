@@ -32,6 +32,9 @@ cp "$TMP/docs/.nojekyll" docs/.nojekyll
 cp "$TMP/docs/robots.txt" docs/robots.txt
 cp "$TMP/docs/melos.html" docs/melos.html
 cp "$TMP/docs/nomika.html" docs/nomika.html
+cp "$TMP/docs/faq.html" docs/faq.html
+cp "$TMP/docs/epikoinonia.html" docs/epikoinonia.html
+cp "$TMP/docs/eukairia.html" docs/eukairia.html
 cp "$TMP/ops/inventario.csv" ops/inventario.csv
 echo "         docs/index.html  ($(wc -c < docs/index.html) bytes)"
 echo "         ops/inventario.csv"

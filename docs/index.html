@@ -77,6 +77,22 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 .legal ul{padding-left:20px}
 .legal .falta{background:#ffe9e6;color:#8c1d12;border-radius:5px;padding:1px 7px;font-weight:700;font-size:13px}
 @media(prefers-color-scheme:dark){.legal .falta{background:#3d1713;color:#ff9d8f}}
+.pieancho{background:var(--card);border-top:1px solid var(--line);padding:30px 18px 4px}
+.pw{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px}
+.pw h4{font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+.pw p{font-size:13px;color:var(--mut);margin-bottom:6px}
+.pw a{color:var(--mut);text-decoration:none}
+.pw a:hover{color:var(--g);text-decoration:underline}
+.pb{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-size:11px;margin:0 5px 5px 0;color:var(--ink)}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;margin-bottom:9px;overflow:hidden}
+.faq summary{padding:15px 16px;cursor:pointer;font-weight:600;font-size:15px;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--g);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"\2212"}
+.faq .a{padding:0 16px 15px;font-size:14px;color:var(--mut)}
+.ficha{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.ficha h3{font-size:16px;margin-bottom:8px;color:var(--g)}
+.ficha p{font-size:14px;color:var(--mut);margin-bottom:8px}
 footer{background:var(--card);border-top:1px solid var(--line);padding:26px 18px 110px;text-align:center;font-size:12px;color:var(--mut)}
 footer a{color:var(--g)}
 .legalpie{max-width:640px;margin:12px auto 0;line-height:1.7}
@@ -87,7 +103,7 @@ footer a{color:var(--g)}
   <h1><a href="index.html">Royal Wellness</a></h1>
   <p>Herbalife Nutrition · Βασιλική Ανδρουτσοπούλου</p>
 </header>
-<nav><ul><li><a href="index.html" class="on">Κατάλογος</a></li><li><a href="melos.html">Γίνε Μέλος</a></li><li><a href="nomika.html">Πληροφορίες</a></li></ul></nav>
+<nav><ul><li><a href="index.html" class="on">Κατάλογος</a></li><li><a href="melos.html">Γίνε Μέλος</a></li><li><a href="eukairia.html">Επαγγελματική Ευκαιρία</a></li><li><a href="faq.html">Συχνές Ερωτήσεις</a></li><li><a href="epikoinonia.html">Επικοινωνία</a></li><li><a href="nomika.html">Πολιτικές</a></li></ul></nav>
 
 <div class="wrap">
   <p style="text-align:center;color:var(--mut);font-size:14px;margin-bottom:4px">
@@ -392,6 +408,41 @@ footer a{color:var(--g)}
   <a class="send" id="wa" href="#" target="_blank" rel="noopener">Αποστολή στο WhatsApp</a>
 </dialog>
 
+
+<div class="pieancho">
+  <div class="pw">
+    <div>
+      <h4>Επικοινωνία</h4>
+      <p>Δευτέρα έως Κυριακή, 9:00 — 21:00</p>
+      <p><span style="opacity:.45">—</span></p>
+      <p><span style="opacity:.45">—</span></p>
+      <p><a href="mailto:dravasi20@gmail.com">dravasi20@gmail.com</a></p>
+    </div>
+    <div>
+      <h4>Πληροφορίες</h4>
+      <p><a href="melos.html">Γίνε Μέλος</a></p>
+      <p><a href="eukairia.html">Επαγγελματική Ευκαιρία</a></p>
+      <p><a href="faq.html">Συχνές Ερωτήσεις</a></p>
+      <p><a href="epikoinonia.html">Ποιοι Είμαστε</a></p>
+      <p><a href="epikoinonia.html#tracking">Παρακολούθηση Παραγγελίας</a></p>
+    </div>
+    <div>
+      <h4>Πολιτικές Καταστήματος</h4>
+      <p><a href="nomika.html#pliromes">Πολιτική Πληρωμών</a></p>
+      <p><a href="nomika.html#apostoli">Πολιτική Αποστολής</a></p>
+      <p><a href="nomika.html#epistrofes">Πολιτική Επιστροφών</a></p>
+      <p><a href="nomika.html#oroi">Όροι Χρήσης</a></p>
+      <p><a href="nomika.html#aporrito">Πολιτική Απορρήτου</a></p>
+      <p><a href="nomika.html#apopoiisi">Αποποίηση Ευθυνών</a></p>
+    </div>
+    <div>
+      <h4>Ακολουθήστε μας</h4>
+      <p><span style="opacity:.5">—</span></p>
+      <h4 style="margin-top:16px">Τρόποι Πληρωμής</h4>
+      <p class="pagoslogo"><span class="pb">IRIS</span><span class="pb">Αντικαταβολή</span><span class="pb">Τραπεζική κατάθεση</span><span class="pb">Μετρητά</span></p>
+    </div>
+  </div>
+</div>
 <footer>
   <p><b>Royal Wellness</b> · Ανεξάρτητο Μέλος Herbalife</p>
   <p>dravasi20@gmail.com · ΓΕΜΗ: PENDIENTE</p>
@@ -399,11 +450,12 @@ footer a{color:var(--g)}
     <p>Τα προϊόντα Herbalife Nutrition δεν είναι φάρμακα και δεν προορίζονται για τη
     διάγνωση, θεραπεία ή πρόληψη ασθενειών. Τα αποτελέσματα διαφέρουν ανά άτομο.
     Συμβουλευτείτε τον γιατρό σας πριν από οποιοδήποτε πρόγραμμα διατροφής.</p>
-    <p><a href="nomika.html">Όροι &amp; Πληροφορίες</a> ·
-    Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994) ·
+    <p>Αυτή η ιστοσελίδα ανήκει σε Ανεξάρτητο Μέλος Herbalife και δεν ανήκει
+    στη Herbalife Nutrition Ltd ούτε τη δεσμεύει.</p>
+    <p>Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994) ·
     <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">Πλατφόρμα ΗΕΔ</a></p>
   </div>
-  <p style="margin-top:14px;opacity:.6">&copy; 2026 · Ενημερώθηκε 13/09/2026 18:19</p>
+  <p style="margin-top:14px;opacity:.6">&copy; 2026 · Ενημερώθηκε 13/09/2026 18:31</p>
 </footer>
 <script>
 var P = {"HL-F1-550": {"n": "Formula 1 Θρεπτικό Πρωτεϊνούχο Ρόφημα", "p": 46.0}, "HL-F1-780": {"n": "Formula 1 Βανίλια 780g", "p": 65.0}, "HL-F1-FREE": {"n": "Formula 1 Free From (χωρίς σόγια)", "p": 45.0}, "HL-F1-VEGAN": {"n": "Vegan Πρωτεϊνούχο Ρόφημα", "p": 45.0}, "HL-F1-BAR": {"n": "Formula 1 Express Μπάρες", "p": 25.0}, "HL-PDM": {"n": "Πρωτεϊνούχο Ρόφημα PDM", "p": 55.0}, "HL-F3": {"n": "Formula 3 Εξατομικευμένες Πρωτεΐνες σε Σκόνη", "p": 47.0}, "HL-COFFEE": {"n": "Καφές με Πρωτεΐνη", "p": 60.0}, "HL-TEA-50": {"n": "Στιγμιαίο Ρόφημα Βοτάνων 50g", "p": 30.0}, "HL-TEA-100": {"n": "Στιγμιαίο Ρόφημα Βοτάνων 100g", "p": 53.0}, "HL-ALOE": {"n": "Συμπυκνωμένος Χυμός Αλόης", "p": 47.0}, "HL-FIBER": {"n": "Μήλο, Βρώμη και Εδώδιμες Ίνες", "p": 39.0}, "HL-CHIPS": {"n": "Protein Chips", "p": 27.0}, "HL-MEALBAR": {"n": "Meal Bar Σοκολάτα", "p": 25.0}, "PR-INICIO": {"n": "Πρόγραμμα Γνωριμίας", "p": 80.0}, "PR-BASICO": {"n": "Βασικό Πρόγραμμα Ελέγχου Βάρους", "p": 133.0}, "PR-30D": {"n": "Πρόγραμμα Ελέγχου Βάρους 30 Ημερών", "p": 150.0}, "PR-AVANZADO": {"n": "Προηγμένο Πρόγραμμα Ελέγχου Βάρους", "p": 187.0}, "PR-21D": {"n": "Πρόγραμμα Αλλαγής Συνηθειών 21 Ημερών", "p": 205.0}, "H24-CR7": {"n": "Herbalife24 CR7 Drive", "p": 25.0}, "H24-HYDRATE": {"n": "Herbalife24 Hydrate", "p": 56.0}, "H24-REBUILD": {"n": "Herbalife24 Rebuild Strength", "p": 65.0}, "H24-BAR": {"n": "Herbalife24 Achieve Protein Bars", "p": 20.0}, "H24-PROLONG": {"n": "Herbalife24 Prolong", "p": 28.0}, "HL-LIFTOFF": {"n": "Liftoff Ενεργειακό Ποτό", "p": 39.0}, "SU-OMEGA3": {"n": "Ωμέγα 3 (Herbalifeline)", "p": 40.0}, "SU-BETAHEART": {"n": "Beta Heart", "p": 50.0}, "SU-CALCIO": {"n": "Ταμπλέτες Ασβεστίου (Xtra-Cal)", "p": 20.0}, "SU-F2-W": {"n": "Formula 2 Σύμπλεγμα Βιταμινών για Γυναίκες", "p": 29.0}, "SU-F2-M": {"n": "Formula 2 Βιταμίνες για Άνδρες", "p": 29.0}, "SU-IMMUNE": {"n": "Immune Booster", "p": 40.0}, "SU-MICROBIO": {"n": "Microbiotic Max", "p": 49.0}, "SU-NIGHT": {"n": "Night Mode", "p": 59.0}, "SU-PHYTO": {"n": "Phyto Complete", "p": 75.0}, "SK-SERUM": {"n": "Herbalife SKIN Ορός Αντιγήρανσης", "p": 72.0}, "SK-COLLAGEN": {"n": "Herbalife SKIN Collagen Skin Booster", "p": 65.0}, "SK-DAY": {"n": "Ενυδατική Κρέμα Ημέρας", "p": 54.0}, "SK-NIGHT": {"n": "Αναπλαστική Κρέμα Νύχτας", "p": 54.0}, "SK-SPF30": {"n": "Κρέμα Ημέρας με SPF 30", "p": 54.0}, "SK-EYE": {"n": "Ενυδατική Κρέμα Ματιών", "p": 43.0}, "SK-CLEANSER": {"n": "Τζελ Καθαρισμού Προσώπου", "p": 27.0}, "SK-TONER": {"n": "Τονωτική Λοσιόν Προσώπου", "p": 21.0}, "AL-SHAMPOO": {"n": "Σαμπουάν με Αλόη", "p": 15.0}, "AL-BODYWASH": {"n": "Ενυδατικό Αφρόλουτρο με Αλόη", "p": 15.0}, "AL-GEL": {"n": "Καταπραϋντικό Τζελ Αλόης", "p": 15.0}, "AL-LOTION": {"n": "Λοσιόν Χεριών και Σώματος με Αλόη", "p": 15.0}};
