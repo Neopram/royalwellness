@@ -1,0 +1,31 @@
+# ---------------------------------------------------------------------------
+# GitHub Pages gratis EXIGE repositorio publico. Todo lo que se suba sera
+# visible para cualquiera e indexable por Google. Aqui se excluye todo lo que
+# no tiene que ser publico.
+#
+# NO quites lineas sin pensar que estas haciendo publico.
+# ---------------------------------------------------------------------------
+
+# Notas internas de trabajo.
+guia/
+GUIA_INTERNA.md
+
+# Datos de negocio: stock, valor de inventario.
+ops/
+
+# Analisis interno de precios.
+catalogo/PRECIOS_REFERENCIA.md
+
+# Script de puesta en marcha: de un solo uso y local.
+scripts/init_repo.sh
+
+# Datos de clientes: NUNCA a un repo publico (RGPD).
+ops/pedidos*.csv
+clientes*.csv
+*_privado.*
+
+# Basura del sistema
+*.bak
+.DS_Store
+Thumbs.db
+desktop.ini

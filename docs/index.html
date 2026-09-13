@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Royal Wellness | Herbalife Nutrition</title>
+<meta name="description" content="Προϊόντα Herbalife Nutrition με προσωπική υποστήριξη. Αποστολή σε όλη την Ελλάδα.">
+<meta name="robots" content="noindex,nofollow">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--g:#0b7d3b;--g2:#12a34f;--ink:#14201a;--mut:#5f6f66;--bg:#f6f8f6;--card:#fff;--line:#e3e9e4}
+@media(prefers-color-scheme:dark){:root{--ink:#e9f1ec;--mut:#9fb0a6;--bg:#0f1512;--card:#18211c;--line:#27332c}}
+body{font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;padding:28px 18px 34px;text-align:center}
+header h1{font-size:26px;letter-spacing:.3px}
+header p{opacity:.92;font-size:14px;margin-top:6px}
+.wrap{max-width:1040px;margin:0 auto;padding:18px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:16px 0 6px;-webkit-overflow-scrolling:touch}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 15px;border-radius:999px;font-size:14px;cursor:pointer}
+.chip.on{background:var(--g);border-color:var(--g);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;padding:10px 0 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column}
+.card.out{opacity:.55}
+.ph{position:relative;height:120px;border-radius:10px;background:linear-gradient(135deg,#d9efe1,#b7e2c8);display:grid;place-items:center;margin-bottom:10px}
+.ph-t{font-size:34px;font-weight:800;color:var(--g);opacity:.5}
+.ph.has-img{background:#fff;overflow:hidden}
+.ph.has-img img{width:100%;height:100%;object-fit:contain;display:block}
+.badge{position:absolute;top:8px;left:8px;background:#b3261e;color:#fff;font-size:11px;padding:3px 8px;border-radius:6px}
+.card h3{font-size:15px;line-height:1.35;margin-bottom:5px}
+.desc{font-size:13px;color:var(--mut);flex:1;margin-bottom:10px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-weight:800;color:var(--g);font-size:17px}
+.btn{background:var(--g);color:#fff;border:0;border-radius:9px;padding:9px 14px;font-size:14px;font-weight:600;cursor:pointer}
+.btn:disabled{background:#98a79e;cursor:not-allowed}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:11px 16px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -6px 20px rgba(0,0,0,.10)}
+.bar.on{display:flex}
+.bar .t{font-size:14px}
+.bar .t b{display:block;font-size:17px;color:var(--g)}
+dialog{border:0;border-radius:16px;padding:0;max-width:440px;width:92%;background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.dh{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.dh h2{font-size:17px}
+.x{border:0;background:none;font-size:24px;line-height:1;cursor:pointer;color:var(--mut)}
+.items{padding:8px 18px;max-height:46vh;overflow:auto}
+.it{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.it .nm{flex:1}
+.qty{display:flex;align-items:center;gap:7px}
+.qty button{width:27px;height:27px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:7px;cursor:pointer;font-size:15px}
+.tot{padding:14px 18px;border-top:1px solid var(--line);font-size:14px}
+.tot div{display:flex;justify-content:space-between;margin-bottom:6px}
+.tot .g{font-size:19px;font-weight:800;color:var(--g)}
+.send{display:block;width:calc(100% - 36px);margin:0 18px 18px;background:#25D366;color:#fff;text-align:center;padding:13px;border-radius:11px;font-weight:700;text-decoration:none}
+footer{background:var(--card);border-top:1px solid var(--line);padding:26px 18px 110px;text-align:center;font-size:12px;color:var(--mut)}
+footer a{color:var(--g)}
+.legal{max-width:640px;margin:12px auto 0;line-height:1.7}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Royal Wellness</h1>
+  <p>Herbalife Nutrition · Βασιλική Ανδρουτσοπούλου</p>
+  <p>Αποστολή σε όλη την Ελλάδα · Δωρεάν άνω των 60.00 €</p>
+</header>
+
+<div class="wrap">
+  <div class="chips"><button class="chip on" onclick="filt(this,'all')">Όλα</button><button class="chip" onclick="filt(this,'nutricion')">Βασική Διατροφή</button><button class="chip" onclick="filt(this,'control')">Έλεγχος Βάρους</button><button class="chip" onclick="filt(this,'programas')">Προγράμματα</button><button class="chip" onclick="filt(this,'energia')">Ενέργεια &amp; Fitness</button><button class="chip" onclick="filt(this,'suplementos')">Συμπληρώματα</button><button class="chip" onclick="filt(this,'belleza')">Περιποίηση</button></div>
+  <div class="grid" id="grid">
+      <article class="card" data-cat="nutricion">
+        <div class="ph"><span class="ph-t">Fo</span></div>
+        <h3>Formula 1 Θρεπτικό Πρωτεϊνούχο Ρόφημα</h3>
+        <p class="desc">Υποκατάστατο γεύματος με πρωτεΐνη, βιταμίνες και μέταλλα. Διαθέσιμο σε βανίλια, σοκολάτα, φράουλα, μπανάνα, cookies &amp; cream, café latte.</p>
+        <div class="row"><span class="price">46,00 €</span><button class="btn" onclick="add('HL-F1-550')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="nutricion">
+        <div class="ph"><span class="ph-t">Fo</span></div>
+        <h3>Formula 1 Βανίλια 780g</h3>
+        <p class="desc">Μεγάλη συσκευασία Formula 1, γεύση βανίλια.</p>
+        <div class="row"><span class="price">65,00 €</span><button class="btn" onclick="add('HL-F1-780')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="nutricion">
+        <div class="ph"><span class="ph-t">Fo</span></div>
+        <h3>Formula 1 Free From (χωρίς σόγια)</h3>
+        <p class="desc">Υποκατάστατο γεύματος χωρίς σόγια, χωρίς γλουτένη και χωρίς λακτόζη.</p>
+        <div class="row"><span class="price">45,00 €</span><button class="btn" onclick="add('HL-F1-FREE')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="nutricion">
+        <div class="ph"><span class="ph-t">Ve</span></div>
+        <h3>Vegan Πρωτεϊνούχο Ρόφημα</h3>
+        <p class="desc">Φυτικής προέλευσης ρόφημα με πρωτεΐνη αρακά και ρυζιού.</p>
+        <div class="row"><span class="price">45,00 €</span><button class="btn" onclick="add('HL-F1-VEGAN')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="nutricion">
+        <div class="ph"><span class="ph-t">Fo</span></div>
+        <h3>Formula 1 Express Μπάρες</h3>
+        <p class="desc">Μπάρες υποκατάστατο γεύματος, 7 τεμάχια.</p>
+        <div class="row"><span class="price">25,00 €</span><button class="btn" onclick="add('HL-F1-BAR')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="nutricion">
+        <div class="ph"><span class="ph-t">Πρ</span></div>
+        <h3>Πρωτεϊνούχο Ρόφημα PDM</h3>
+        <p class="desc">Ρόφημα με 15g πρωτεΐνης ανά δόση, 24 βιταμίνες και μέταλλα.</p>
+        <div class="row"><span class="price">55,00 €</span><button class="btn" onclick="add('HL-PDM')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="nutricion">
+        <div class="ph"><span class="ph-t">Fo</span></div>
+        <h3>Formula 3 Εξατομικευμένες Πρωτεΐνες σε Σκόνη</h3>
+        <p class="desc">Καθαρή πρωτεΐνη σόγιας και ορού γάλακτος για προσθήκη σε οποιοδήποτε γεύμα.</p>
+        <div class="row"><span class="price">47,00 €</span><button class="btn" onclick="add('HL-F3')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="nutricion">
+        <div class="ph"><span class="ph-t">Κα</span></div>
+        <h3>Καφές με Πρωτεΐνη</h3>
+        <p class="desc">Στιγμιαίος καφές εμπλουτισμένος με πρωτεΐνη.</p>
+        <div class="row"><span class="price">60,00 €</span><button class="btn" onclick="add('HL-COFFEE')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="control">
+        <div class="ph"><span class="ph-t">Στ</span></div>
+        <h3>Στιγμιαίο Ρόφημα Βοτάνων 50g</h3>
+        <p class="desc">Ρόφημα με εκχύλισμα πράσινου τσαγιού. Λεμόνι, ροδάκινο, βατόμουρο, original.</p>
+        <div class="row"><span class="price">30,00 €</span><button class="btn" onclick="add('HL-TEA-50')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="control">
+        <div class="ph"><span class="ph-t">Στ</span></div>
+        <h3>Στιγμιαίο Ρόφημα Βοτάνων 100g</h3>
+        <p class="desc">Μεγάλη συσκευασία του ροφήματος βοτάνων.</p>
+        <div class="row"><span class="price">53,00 €</span><button class="btn" onclick="add('HL-TEA-100')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="control">
+        <div class="ph"><span class="ph-t">Συ</span></div>
+        <h3>Συμπυκνωμένος Χυμός Αλόης</h3>
+        <p class="desc">Συμπύκνωμα από χυμό φύλλων αλόης. Original και mango.</p>
+        <div class="row"><span class="price">47,00 €</span><button class="btn" onclick="add('HL-ALOE')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="control">
+        <div class="ph"><span class="ph-t">Μή</span></div>
+        <h3>Μήλο, Βρώμη και Εδώδιμες Ίνες</h3>
+        <p class="desc">Συμπλήρωμα με 6 πηγές φυτικών ινών.</p>
+        <div class="row"><span class="price">39,00 €</span><button class="btn" onclick="add('HL-FIBER')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="control">
+        <div class="ph"><span class="ph-t">Pr</span></div>
+        <h3>Protein Chips</h3>
+        <p class="desc">Σνακ με πρωτεΐνη, ψημένα όχι τηγανητά.</p>
+        <div class="row"><span class="price">27,00 €</span><button class="btn" onclick="add('HL-CHIPS')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="control">
+        <div class="ph"><span class="ph-t">Me</span></div>
+        <h3>Meal Bar Σοκολάτα</h3>
+        <p class="desc">Μπάρα γεύματος με γεύση σοκολάτα.</p>
+        <div class="row"><span class="price">25,00 €</span><button class="btn" onclick="add('HL-MEALBAR')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="programas">
+        <div class="ph"><span class="ph-t">Πρ</span></div>
+        <h3>Πρόγραμμα Γνωριμίας</h3>
+        <p class="desc">Εισαγωγικό πακέτο για να δοκιμάσεις τα βασικά προϊόντα, με προσωπική καθοδήγηση.</p>
+        <div class="row"><span class="price">80,00 €</span><button class="btn" onclick="add('PR-INICIO')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="programas">
+        <div class="ph"><span class="ph-t">Βα</span></div>
+        <h3>Βασικό Πρόγραμμα Ελέγχου Βάρους</h3>
+        <p class="desc">Formula 1, πρωτεΐνη και τσάι βοτάνων. Με παρακολούθηση.</p>
+        <div class="row"><span class="price">133,00 €</span><button class="btn" onclick="add('PR-BASICO')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="programas">
+        <div class="ph"><span class="ph-t">Πρ</span></div>
+        <h3>Πρόγραμμα Ελέγχου Βάρους 30 Ημερών</h3>
+        <p class="desc">Πλήρες πρόγραμμα 30 ημερών με εβδομαδιαία παρακολούθηση.</p>
+        <div class="row"><span class="price">150,00 €</span><button class="btn" onclick="add('PR-30D')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="programas">
+        <div class="ph"><span class="ph-t">Πρ</span></div>
+        <h3>Προηγμένο Πρόγραμμα Ελέγχου Βάρους</h3>
+        <p class="desc">Διευρυμένο πρόγραμμα με επιπλέον συμπληρώματα.</p>
+        <div class="row"><span class="price">187,00 €</span><button class="btn" onclick="add('PR-AVANZADO')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="programas">
+        <div class="ph"><span class="ph-t">Πρ</span></div>
+        <h3>Πρόγραμμα Αλλαγής Συνηθειών 21 Ημερών</h3>
+        <p class="desc">Πρόγραμμα 21 ημερών εστιασμένο στη σταδιακή αλλαγή διατροφικών συνηθειών.</p>
+        <div class="row"><span class="price">205,00 €</span><button class="btn" onclick="add('PR-21D')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="energia">
+        <div class="ph"><span class="ph-t">He</span></div>
+        <h3>Herbalife24 CR7 Drive</h3>
+        <p class="desc">Ρόφημα ενυδάτωσης με ηλεκτρολύτες και υδατάνθρακες για την προπόνηση.</p>
+        <div class="row"><span class="price">25,00 €</span><button class="btn" onclick="add('H24-CR7')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="energia">
+        <div class="ph"><span class="ph-t">He</span></div>
+        <h3>Herbalife24 Hydrate</h3>
+        <p class="desc">Φακελάκια ενυδάτωσης με ηλεκτρολύτες, χαμηλές θερμίδες.</p>
+        <div class="row"><span class="price">56,00 €</span><button class="btn" onclick="add('H24-HYDRATE')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="energia">
+        <div class="ph"><span class="ph-t">He</span></div>
+        <h3>Herbalife24 Rebuild Strength</h3>
+        <p class="desc">Ρόφημα αποκατάστασης μετά την προπόνηση με 25g πρωτεΐνης.</p>
+        <div class="row"><span class="price">65,00 €</span><button class="btn" onclick="add('H24-REBUILD')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="energia">
+        <div class="ph"><span class="ph-t">He</span></div>
+        <h3>Herbalife24 Achieve Protein Bars</h3>
+        <p class="desc">Μπάρες με 20g πρωτεΐνης, 6 τεμάχια.</p>
+        <div class="row"><span class="price">20,00 €</span><button class="btn" onclick="add('H24-BAR')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="energia">
+        <div class="ph"><span class="ph-t">He</span></div>
+        <h3>Herbalife24 Prolong</h3>
+        <p class="desc">Ρόφημα υδατανθράκων και πρωτεΐνης για παρατεταμένη άσκηση.</p>
+        <div class="row"><span class="price">28,00 €</span><button class="btn" onclick="add('H24-PROLONG')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="energia">
+        <div class="ph"><span class="ph-t">Li</span></div>
+        <h3>Liftoff Ενεργειακό Ποτό</h3>
+        <p class="desc">Αναβράζουσες ταμπλέτες με καφεΐνη και βιταμίνες Β.</p>
+        <div class="row"><span class="price">39,00 €</span><button class="btn" onclick="add('HL-LIFTOFF')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Ωμ</span></div>
+        <h3>Ωμέγα 3 (Herbalifeline)</h3>
+        <p class="desc">Συμπλήρωμα με EPA και DHA από ιχθυέλαιο.</p>
+        <div class="row"><span class="price">40,00 €</span><button class="btn" onclick="add('SU-OMEGA3')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Be</span></div>
+        <h3>Beta Heart</h3>
+        <p class="desc">Συμπλήρωμα με βήτα-γλυκάνη βρώμης.</p>
+        <div class="row"><span class="price">50,00 €</span><button class="btn" onclick="add('SU-BETAHEART')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Τα</span></div>
+        <h3>Ταμπλέτες Ασβεστίου (Xtra-Cal)</h3>
+        <p class="desc">Ασβέστιο με βιταμίνη D και μαγνήσιο.</p>
+        <div class="row"><span class="price">20,00 €</span><button class="btn" onclick="add('SU-CALCIO')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Fo</span></div>
+        <h3>Formula 2 Σύμπλεγμα Βιταμινών για Γυναίκες</h3>
+        <p class="desc">Πολυβιταμινούχο συμπλήρωμα σχεδιασμένο για γυναίκες.</p>
+        <div class="row"><span class="price">29,00 €</span><button class="btn" onclick="add('SU-F2-W')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Fo</span></div>
+        <h3>Formula 2 Βιταμίνες για Άνδρες</h3>
+        <p class="desc">Πολυβιταμινούχο συμπλήρωμα σχεδιασμένο για άνδρες.</p>
+        <div class="row"><span class="price">29,00 €</span><button class="btn" onclick="add('SU-F2-M')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Im</span></div>
+        <h3>Immune Booster</h3>
+        <p class="desc">Σκόνη με βιταμίνη C, ψευδάργυρο, σελήνιο και EpiCor.</p>
+        <div class="row"><span class="price">40,00 €</span><button class="btn" onclick="add('SU-IMMUNE')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Mi</span></div>
+        <h3>Microbiotic Max</h3>
+        <p class="desc">Φακελάκια με προβιοτικά στελέχη.</p>
+        <div class="row"><span class="price">49,00 €</span><button class="btn" onclick="add('SU-MICROBIO')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Ni</span></div>
+        <h3>Night Mode</h3>
+        <p class="desc">Συμπλήρωμα με μελατονίνη και εκχυλίσματα βοτάνων για τη νύχτα.</p>
+        <div class="row"><span class="price">59,00 €</span><button class="btn" onclick="add('SU-NIGHT')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="suplementos">
+        <div class="ph"><span class="ph-t">Ph</span></div>
+        <h3>Phyto Complete</h3>
+        <p class="desc">Σκόνη με εκχυλίσματα φρούτων και λαχανικών.</p>
+        <div class="row"><span class="price">75,00 €</span><button class="btn" onclick="add('SU-PHYTO')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">He</span></div>
+        <h3>Herbalife SKIN Ορός Αντιγήρανσης</h3>
+        <p class="desc">Συμπυκνωμένος ορός προσώπου.</p>
+        <div class="row"><span class="price">72,00 €</span><button class="btn" onclick="add('SK-SERUM')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">He</span></div>
+        <h3>Herbalife SKIN Collagen Skin Booster</h3>
+        <p class="desc">Ρόφημα με πεπτίδια κολλαγόνου, βιταμίνες και μέταλλα.</p>
+        <div class="row"><span class="price">65,00 €</span><button class="btn" onclick="add('SK-COLLAGEN')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Εν</span></div>
+        <h3>Ενυδατική Κρέμα Ημέρας</h3>
+        <p class="desc">Κρέμα ημέρας για ενυδάτωση.</p>
+        <div class="row"><span class="price">54,00 €</span><button class="btn" onclick="add('SK-DAY')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Αν</span></div>
+        <h3>Αναπλαστική Κρέμα Νύχτας</h3>
+        <p class="desc">Κρέμα νύχτας.</p>
+        <div class="row"><span class="price">54,00 €</span><button class="btn" onclick="add('SK-NIGHT')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Κρ</span></div>
+        <h3>Κρέμα Ημέρας με SPF 30</h3>
+        <p class="desc">Ενυδατική κρέμα ημέρας με αντηλιακή προστασία SPF 30.</p>
+        <div class="row"><span class="price">54,00 €</span><button class="btn" onclick="add('SK-SPF30')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Εν</span></div>
+        <h3>Ενυδατική Κρέμα Ματιών</h3>
+        <p class="desc">Κρέμα για την περιοχή των ματιών.</p>
+        <div class="row"><span class="price">43,00 €</span><button class="btn" onclick="add('SK-EYE')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Τζ</span></div>
+        <h3>Τζελ Καθαρισμού Προσώπου</h3>
+        <p class="desc">Τζελ καθαρισμού για καθημερινή χρήση.</p>
+        <div class="row"><span class="price">27,00 €</span><button class="btn" onclick="add('SK-CLEANSER')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Το</span></div>
+        <h3>Τονωτική Λοσιόν Προσώπου</h3>
+        <p class="desc">Λοσιόν τόνωσης μετά τον καθαρισμό.</p>
+        <div class="row"><span class="price">21,00 €</span><button class="btn" onclick="add('SK-TONER')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Σα</span></div>
+        <h3>Σαμπουάν με Αλόη</h3>
+        <p class="desc">Σαμπουάν με αλόη για καθημερινή χρήση.</p>
+        <div class="row"><span class="price">15,00 €</span><button class="btn" onclick="add('AL-SHAMPOO')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Εν</span></div>
+        <h3>Ενυδατικό Αφρόλουτρο με Αλόη</h3>
+        <p class="desc">Αφρόλουτρο με αλόη.</p>
+        <div class="row"><span class="price">15,00 €</span><button class="btn" onclick="add('AL-BODYWASH')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Κα</span></div>
+        <h3>Καταπραϋντικό Τζελ Αλόης</h3>
+        <p class="desc">Τζελ αλόης για το δέρμα.</p>
+        <div class="row"><span class="price">15,00 €</span><button class="btn" onclick="add('AL-GEL')">Προσθήκη</button></div>
+      </article>
+      <article class="card" data-cat="belleza">
+        <div class="ph"><span class="ph-t">Λο</span></div>
+        <h3>Λοσιόν Χεριών και Σώματος με Αλόη</h3>
+        <p class="desc">Ενυδατική λοσιόν με αλόη.</p>
+        <div class="row"><span class="price">15,00 €</span><button class="btn" onclick="add('AL-LOTION')">Προσθήκη</button></div>
+      </article>
+  </div>
+</div>
+
+<div class="bar" id="bar">
+  <div class="t"><span id="n">0 προϊόντα</span><b id="s">0,00 €</b></div>
+  <button class="btn" onclick="dlg.showModal();render()">Παραγγελία</button>
+</div>
+
+<dialog id="dlg">
+  <div class="dh"><h2>Η παραγγελία σου</h2><button class="x" onclick="dlg.close()">&times;</button></div>
+  <div class="items" id="items"></div>
+  <div class="tot">
+    <div><span>Υποσύνολο</span><span id="sub">0,00 €</span></div>
+    <div><span>Μεταφορικά</span><span id="shp">0,00 €</span></div>
+    <div><span>Σύνολο</span><span class="g" id="grd">0,00 €</span></div>
+  </div>
+  <a class="send" id="wa" href="#" target="_blank" rel="noopener">Αποστολή στο WhatsApp</a>
+</dialog>
+
+<footer>
+  <p><b>Royal Wellness</b> · Ανεξάρτητο Μέλος Herbalife</p>
+  <p>dravasi20@gmail.com · ΓΕΜΗ: PENDIENTE</p>
+  <div class="legal">
+    <p>Τα προϊόντα Herbalife Nutrition δεν είναι φάρμακα και δεν προορίζονται για τη διάγνωση, θεραπεία ή πρόληψη ασθενειών.
+    Τα αποτελέσματα διαφέρουν ανά άτομο. Συμβουλευτείτε τον γιατρό σας πριν από οποιοδήποτε πρόγραμμα διατροφής.</p>
+    <p>Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994). Πλατφόρμα ΗΕΔ: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a></p>
+  </div>
+  <p style="margin-top:14px;opacity:.6">&copy; 2026 · Ενημερώθηκε 13/09/2026 18:02</p>
+</footer>
+
+<script>
+var P = {"HL-F1-550": {"n": "Formula 1 Θρεπτικό Πρωτεϊνούχο Ρόφημα", "p": 46.0}, "HL-F1-780": {"n": "Formula 1 Βανίλια 780g", "p": 65.0}, "HL-F1-FREE": {"n": "Formula 1 Free From (χωρίς σόγια)", "p": 45.0}, "HL-F1-VEGAN": {"n": "Vegan Πρωτεϊνούχο Ρόφημα", "p": 45.0}, "HL-F1-BAR": {"n": "Formula 1 Express Μπάρες", "p": 25.0}, "HL-PDM": {"n": "Πρωτεϊνούχο Ρόφημα PDM", "p": 55.0}, "HL-F3": {"n": "Formula 3 Εξατομικευμένες Πρωτεΐνες σε Σκόνη", "p": 47.0}, "HL-COFFEE": {"n": "Καφές με Πρωτεΐνη", "p": 60.0}, "HL-TEA-50": {"n": "Στιγμιαίο Ρόφημα Βοτάνων 50g", "p": 30.0}, "HL-TEA-100": {"n": "Στιγμιαίο Ρόφημα Βοτάνων 100g", "p": 53.0}, "HL-ALOE": {"n": "Συμπυκνωμένος Χυμός Αλόης", "p": 47.0}, "HL-FIBER": {"n": "Μήλο, Βρώμη και Εδώδιμες Ίνες", "p": 39.0}, "HL-CHIPS": {"n": "Protein Chips", "p": 27.0}, "HL-MEALBAR": {"n": "Meal Bar Σοκολάτα", "p": 25.0}, "PR-INICIO": {"n": "Πρόγραμμα Γνωριμίας", "p": 80.0}, "PR-BASICO": {"n": "Βασικό Πρόγραμμα Ελέγχου Βάρους", "p": 133.0}, "PR-30D": {"n": "Πρόγραμμα Ελέγχου Βάρους 30 Ημερών", "p": 150.0}, "PR-AVANZADO": {"n": "Προηγμένο Πρόγραμμα Ελέγχου Βάρους", "p": 187.0}, "PR-21D": {"n": "Πρόγραμμα Αλλαγής Συνηθειών 21 Ημερών", "p": 205.0}, "H24-CR7": {"n": "Herbalife24 CR7 Drive", "p": 25.0}, "H24-HYDRATE": {"n": "Herbalife24 Hydrate", "p": 56.0}, "H24-REBUILD": {"n": "Herbalife24 Rebuild Strength", "p": 65.0}, "H24-BAR": {"n": "Herbalife24 Achieve Protein Bars", "p": 20.0}, "H24-PROLONG": {"n": "Herbalife24 Prolong", "p": 28.0}, "HL-LIFTOFF": {"n": "Liftoff Ενεργειακό Ποτό", "p": 39.0}, "SU-OMEGA3": {"n": "Ωμέγα 3 (Herbalifeline)", "p": 40.0}, "SU-BETAHEART": {"n": "Beta Heart", "p": 50.0}, "SU-CALCIO": {"n": "Ταμπλέτες Ασβεστίου (Xtra-Cal)", "p": 20.0}, "SU-F2-W": {"n": "Formula 2 Σύμπλεγμα Βιταμινών για Γυναίκες", "p": 29.0}, "SU-F2-M": {"n": "Formula 2 Βιταμίνες για Άνδρες", "p": 29.0}, "SU-IMMUNE": {"n": "Immune Booster", "p": 40.0}, "SU-MICROBIO": {"n": "Microbiotic Max", "p": 49.0}, "SU-NIGHT": {"n": "Night Mode", "p": 59.0}, "SU-PHYTO": {"n": "Phyto Complete", "p": 75.0}, "SK-SERUM": {"n": "Herbalife SKIN Ορός Αντιγήρανσης", "p": 72.0}, "SK-COLLAGEN": {"n": "Herbalife SKIN Collagen Skin Booster", "p": 65.0}, "SK-DAY": {"n": "Ενυδατική Κρέμα Ημέρας", "p": 54.0}, "SK-NIGHT": {"n": "Αναπλαστική Κρέμα Νύχτας", "p": 54.0}, "SK-SPF30": {"n": "Κρέμα Ημέρας με SPF 30", "p": 54.0}, "SK-EYE": {"n": "Ενυδατική Κρέμα Ματιών", "p": 43.0}, "SK-CLEANSER": {"n": "Τζελ Καθαρισμού Προσώπου", "p": 27.0}, "SK-TONER": {"n": "Τονωτική Λοσιόν Προσώπου", "p": 21.0}, "AL-SHAMPOO": {"n": "Σαμπουάν με Αλόη", "p": 15.0}, "AL-BODYWASH": {"n": "Ενυδατικό Αφρόλουτρο με Αλόη", "p": 15.0}, "AL-GEL": {"n": "Καταπραϋντικό Τζελ Αλόης", "p": 15.0}, "AL-LOTION": {"n": "Λοσιόν Χεριών και Σώματος με Αλόη", "p": 15.0}};
+var SHIP = 3.50, FREE = 60.00, SIM = "€", WA = "30XXXXXXXXXX";
+var cart = {};
+try { cart = JSON.parse(localStorage.getItem("rw_cart") || "{}"); } catch(e) { cart = {}; }
+var dlg = document.getElementById("dlg");
+
+function eur(n){ return n.toFixed(2).replace(".", ",") + " " + SIM; }
+function save(){ try{ localStorage.setItem("rw_cart", JSON.stringify(cart)); }catch(e){} }
+function count(){ var c=0; for(var k in cart) c+=cart[k]; return c; }
+function sub(){ var s=0; for(var k in cart) s += P[k].p * cart[k]; return s; }
+function ship(){ var s=sub(); return (s<=0 || s>=FREE) ? 0 : SHIP; }
+
+function add(sku){ cart[sku]=(cart[sku]||0)+1; save(); bar(); }
+function chg(sku,d){ cart[sku]=(cart[sku]||0)+d; if(cart[sku]<=0) delete cart[sku]; save(); bar(); render(); }
+
+function bar(){
+  var b=document.getElementById("bar"), c=count();
+  b.classList.toggle("on", c>0);
+  document.getElementById("n").textContent = c + (c===1 ? " προϊόν" : " προϊόντα");
+  document.getElementById("s").textContent = eur(sub()+ship());
+}
+
+function render(){
+  var box=document.getElementById("items"), h="";
+  for(var k in cart){
+    h += '<div class="it"><span class="nm">'+P[k].n+'</span>'
+       + '<div class="qty"><button onclick="chg(\''+k+'\',-1)">-</button>'
+       + '<span>'+cart[k]+'</span>'
+       + '<button onclick="chg(\''+k+'\',1)">+</button></div>'
+       + '<span>'+eur(P[k].p*cart[k])+'</span></div>';
+  }
+  box.innerHTML = h || '<p style="padding:18px 0;color:var(--mut)">Το καλάθι είναι άδειο.</p>';
+  document.getElementById("sub").textContent = eur(sub());
+  document.getElementById("shp").textContent = ship()===0 ? "Δωρεάν" : eur(ship());
+  document.getElementById("grd").textContent = eur(sub()+ship());
+
+  var t = "Γεια σας! Θέλω να παραγγείλω:\n";
+  for(var k in cart) t += "• " + cart[k] + "x " + P[k].n + " - " + eur(P[k].p*cart[k]) + "\n";
+  t += "\nΜεταφορικά: " + (ship()===0 ? "Δωρεάν" : eur(ship()));
+  t += "\nΣΥΝΟΛΟ: " + eur(sub()+ship());
+  t += "\n\nΟνοματεπώνυμο:\nΔιεύθυνση:\nΤηλέφωνο:";
+  document.getElementById("wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(t);
+}
+
+function filt(btn, cat){
+  var cs=document.querySelectorAll(".chip");
+  for(var i=0;i<cs.length;i++) cs[i].classList.remove("on");
+  btn.classList.add("on");
+  var cards=document.querySelectorAll(".card");
+  for(var j=0;j<cards.length;j++){
+    cards[j].style.display = (cat==="all" || cards[j].dataset.cat===cat) ? "" : "none";
+  }
+}
+
+for(var k in cart){ if(!P[k]) delete cart[k]; }
+save(); bar();
+</script>
+</body>
+</html>
