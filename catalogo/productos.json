@@ -21,9 +21,42 @@
     "consultora": "Βασιλική Ανδρουτσοπούλου",
     "gemi": "PENDIENTE",
     "afm": "PENDIENTE",
+    "doy": "PENDIENTE",
+    "razon_social": "PENDIENTE",
+    "direccion": "PENDIENTE",
+    "telefono_publico": "PENDIENTE",
     "modo_catalogo": true,
     "_modo_catalogo": "true = se ignora el stock y todo se muestra disponible (pides a Herbalife por encargo). false = se respeta el campo stock y lo que este a 0 sale como agotado."
   },
+  "pago": {
+    "_": "Metodos que se ofrecen en el carrito y se listan en la pagina legal.",
+    "antikatavoli": true,
+    "antikatavoli_coste": 2.00,
+    "_antikatavoli": "Contra reembolso. En Grecia sigue siendo mayoritario y NO necesita pasarela ni cuenta de empresa. Pon el coste a 0 si no quieres cobrar recargo.",
+    "transferencia": true,
+    "banco": "PENDIENTE",
+    "iban": "PENDIENTE",
+    "titular": "PENDIENTE",
+    "efectivo": true,
+    "_efectivo": "Entrega en mano, para clientes de tu zona."
+  },
+
+  "miembro": {
+    "_": "Pagina 'Gine Melos'. Es el motor de ingresos recurrentes: el cliente se da de alta en Herbalife con TU codigo y tu cobras sobre sus compras.",
+    "activo": true,
+    "sponsor_id": "PENDIENTE",
+    "_sponsor_id": "Tu Herbalife Member ID, formato tipo G70845123C. Esta en MyHerbalife.com.",
+    "apellido_codigo": "PENDIENTE",
+    "_apellido_codigo": "Las 3 primeras letras de tu apellido en mayusculas, como pide el formulario de alta (ej. AND).",
+    "url_registro": "PENDIENTE",
+    "_url_registro": "Herbalife NO publica una URL de alta generica (comprobado: 404 en todas). El enlace personalizado te lo da MyHerbalife.com. Pegalo aqui.",
+    "kit_online": 41.00,
+    "kit_telefono": 61.00,
+    "_kit": "Precios de referencia tomados de otro Miembro griego en 2021. VERIFICALOS.",
+    "descuento_min": 25,
+    "descuento_max": 50
+  },
+
   "categorias": [
     { "id": "nutricion",   "nombre_el": "Βασική Διατροφή",    "nombre_es": "Nutricion basica" },
     { "id": "control",     "nombre_el": "Έλεγχος Βάρους",     "nombre_es": "Control de peso" },

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Γίνε Μέλος | Royal Wellness</title>
+<meta name="description" content="Γίνε Μέλος Herbalife και απόκτησε μόνιμη έκπτωση σε όλα τα προϊόντα.">
+<meta name="robots" content="noindex,nofollow">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--g:#0b7d3b;--g2:#12a34f;--ink:#14201a;--mut:#5f6f66;--bg:#f6f8f6;--card:#fff;--line:#e3e9e4}
+@media(prefers-color-scheme:dark){:root{--ink:#e9f1ec;--mut:#9fb0a6;--bg:#0f1512;--card:#18211c;--line:#27332c}}
+body{font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;padding:26px 18px 30px;text-align:center}
+header h1{font-size:25px;letter-spacing:.3px}
+header h1 a{color:#fff;text-decoration:none}
+header p{opacity:.92;font-size:14px;margin-top:6px}
+nav{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+nav ul{display:flex;justify-content:center;gap:4px;list-style:none;max-width:1040px;margin:0 auto;padding:0 8px;overflow-x:auto}
+nav a{display:block;padding:13px 16px;color:var(--mut);text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent}
+nav a.on{color:var(--g);border-bottom-color:var(--g)}
+.wrap{max-width:1040px;margin:0 auto;padding:18px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:16px 0 6px;-webkit-overflow-scrolling:touch}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 15px;border-radius:999px;font-size:14px;cursor:pointer}
+.chip.on{background:var(--g);border-color:var(--g);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;padding:10px 0 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column}
+.card.out{opacity:.55}
+.ph{position:relative;height:120px;border-radius:10px;background:linear-gradient(135deg,#d9efe1,#b7e2c8);display:grid;place-items:center;margin-bottom:10px}
+.ph-t{font-size:34px;font-weight:800;color:var(--g);opacity:.5}
+.ph.has-img{background:#fff;overflow:hidden}
+.ph.has-img img{width:100%;height:100%;object-fit:contain;display:block}
+.badge{position:absolute;top:8px;left:8px;background:#b3261e;color:#fff;font-size:11px;padding:3px 8px;border-radius:6px}
+.card h3{font-size:15px;line-height:1.35;margin-bottom:5px}
+.desc{font-size:13px;color:var(--mut);flex:1;margin-bottom:10px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-weight:800;color:var(--g);font-size:17px}
+.btn{background:var(--g);color:#fff;border:0;border-radius:9px;padding:9px 14px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:disabled{background:#98a79e;cursor:not-allowed}
+.btn.big{padding:14px 26px;font-size:16px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:11px 16px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -6px 20px rgba(0,0,0,.10);z-index:60}
+.bar.on{display:flex}
+.bar .t{font-size:14px}
+.bar .t b{display:block;font-size:17px;color:var(--g)}
+dialog{border:0;border-radius:16px;padding:0;max-width:460px;width:92%;background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.dh{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.dh h2{font-size:17px}
+.x{border:0;background:none;font-size:24px;line-height:1;cursor:pointer;color:var(--mut)}
+.items{padding:8px 18px;max-height:34vh;overflow:auto}
+.it{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.it .nm{flex:1}
+.qty{display:flex;align-items:center;gap:7px}
+.qty button{width:27px;height:27px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:7px;cursor:pointer;font-size:15px}
+.pagos{padding:12px 18px;border-top:1px solid var(--line)}
+.pagos h4{font-size:13px;color:var(--mut);margin-bottom:8px;font-weight:600}
+.pagos label{display:flex;align-items:center;gap:9px;padding:7px 0;font-size:14px;cursor:pointer}
+.pagos small{color:var(--mut)}
+.tot{padding:14px 18px;border-top:1px solid var(--line);font-size:14px}
+.tot div{display:flex;justify-content:space-between;margin-bottom:6px}
+.tot .g{font-size:19px;font-weight:800;color:var(--g)}
+.send{display:block;width:calc(100% - 36px);margin:0 18px 18px;background:#25D366;color:#fff;text-align:center;padding:13px;border-radius:11px;font-weight:700;text-decoration:none}
+.hero{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 22px;text-align:center;margin-bottom:18px}
+.hero .big{font-size:40px;font-weight:800;color:var(--g);line-height:1.1}
+.hero p{color:var(--mut);margin-top:8px}
+.pasos{counter-reset:p;list-style:none;margin:18px 0}
+.pasos li{counter-increment:p;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 16px 56px;margin-bottom:10px;position:relative}
+.pasos li::before{content:counter(p);position:absolute;left:16px;top:16px;width:26px;height:26px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.pasos b{display:block;margin-bottom:3px}
+.pasos small{color:var(--mut);display:block;margin-top:4px}
+.codigo{display:inline-block;background:var(--bg);border:1px dashed var(--g);border-radius:8px;padding:6px 12px;font-family:ui-monospace,Consolas,monospace;font-weight:700;color:var(--g);font-size:16px;margin:4px 6px 4px 0;user-select:all}
+.avisobox{background:#fff6e5;border:1px solid #e8c882;color:#6b4c05;border-radius:10px;padding:12px 14px;font-size:14px;margin:14px 0}
+@media(prefers-color-scheme:dark){.avisobox{background:#2b2412;border-color:#5c4a1c;color:#e8c882}}
+.legal h2{font-size:19px;margin:26px 0 8px;color:var(--g)}
+.legal h3{font-size:15px;margin:16px 0 5px}
+.legal p,.legal li{font-size:14px;color:var(--ink);margin-bottom:8px}
+.legal ul{padding-left:20px}
+.legal .falta{background:#ffe9e6;color:#8c1d12;border-radius:5px;padding:1px 7px;font-weight:700;font-size:13px}
+@media(prefers-color-scheme:dark){.legal .falta{background:#3d1713;color:#ff9d8f}}
+footer{background:var(--card);border-top:1px solid var(--line);padding:26px 18px 110px;text-align:center;font-size:12px;color:var(--mut)}
+footer a{color:var(--g)}
+.legalpie{max-width:640px;margin:12px auto 0;line-height:1.7}
+</style>
+</head>
+<body>
+<header>
+  <h1><a href="index.html">Royal Wellness</a></h1>
+  <p>Herbalife Nutrition · Βασιλική Ανδρουτσοπούλου</p>
+</header>
+<nav><ul><li><a href="index.html">Κατάλογος</a></li><li><a href="melos.html" class="on">Γίνε Μέλος</a></li><li><a href="nomika.html">Πληροφορίες</a></li></ul></nav>
+
+<div class="wrap">
+  <div class="avisobox"><b>⚠ Σελίδα υπό κατασκευή.</b>
+    Ο κωδικός συνεργάτη και ο σύνδεσμος εγγραφής δεν έχουν συμπληρωθεί ακόμη.
+    Επικοινωνήστε μαζί μας απευθείας.</div>
+  <div class="hero">
+    <div class="big">25% – 50%</div>
+    <p>Μόνιμη έκπτωση σε όλα τα προϊόντα Herbalife Nutrition,<br>για πάντα, με μία μόνο εγγραφή.</p>
+  </div>
+
+  <h2 style="font-size:20px;margin:22px 0 6px">Τι είναι το Μέλος Herbalife;</h2>
+  <p style="color:var(--mut);font-size:15px">
+    Γίνεσαι επίσημο Μέλος της Herbalife Nutrition, παραγγέλνεις απευθείας από την εταιρεία
+    σε τιμή Μέλους και κρατάς τη μόνιμη έκπτωση όσο παραμένεις εγγεγραμμένος.
+    Δεν υπάρχει υποχρέωση ελάχιστης παραγγελίας ούτε υποχρέωση πώλησης.
+  </p>
+
+  <h2 style="font-size:20px;margin:24px 0 6px">Πώς γίνεται</h2>
+  <ol class="pasos">
+    <li><b>Πακέτο εγγραφής</b>
+      Περιλαμβάνει Formula 1, shaker, δοσομετρητές, επίσημο τιμοκατάλογο Μέλους
+      και πρόσβαση στην εφαρμογή.
+      <small>41.00 € online · 61.00 € τηλεφωνικά</small></li>
+    <li><b>Εγγραφή στη Herbalife</b>
+      Συμπληρώνεις τα στοιχεία σου στην επίσημη σελίδα της εταιρείας.
+      <small>Η εγγραφή γίνεται απευθείας στη Herbalife, όχι σε αυτό το site.</small></li>
+    <li><b>Στοιχεία Χορηγού</b>
+      Στο πεδίο του χορηγού συμπληρώνεις:
+      <span class="codigo">PENDIENTE</span>
+      <span class="codigo">PENDIENTE</span>
+      <small>Χωρίς αυτά τα στοιχεία δεν συνδέεσαι με την ομάδα μας και δεν έχεις υποστήριξη.</small></li>
+    <li><b>Υποστήριξη</b>
+      Προσωπική καθοδήγηση, πρόγραμμα στα μέτρα σου και παρακολούθηση.
+      <small>Αυτό είναι που δεν αγοράζεται μόνο του.</small></li>
+  </ol>
+
+  <div style="text-align:center;margin:26px 0 40px"><button class="btn big" disabled>Σύντομα διαθέσιμο</button></div>
+
+  <p style="color:var(--mut);font-size:13px;text-align:center;margin-bottom:60px">
+    Η ιδιότητα του Μέλους δεν συνεπάγεται εισόδημα. Δείτε τη
+    <a href="https://www.herbalife.com/content/dam/global-reusable-assets/documents/pd-statement-typical-distributor-earnings-el-gr.pdf" target="_blank" rel="noopener">Δήλωση Τυπικών Κερδών</a>
+    της Herbalife.
+  </p>
+</div>
+
+<footer>
+  <p><b>Royal Wellness</b> · Ανεξάρτητο Μέλος Herbalife</p>
+  <p>dravasi20@gmail.com · ΓΕΜΗ: PENDIENTE</p>
+  <div class="legalpie">
+    <p>Τα προϊόντα Herbalife Nutrition δεν είναι φάρμακα και δεν προορίζονται για τη
+    διάγνωση, θεραπεία ή πρόληψη ασθενειών. Τα αποτελέσματα διαφέρουν ανά άτομο.
+    Συμβουλευτείτε τον γιατρό σας πριν από οποιοδήποτε πρόγραμμα διατροφής.</p>
+    <p><a href="nomika.html">Όροι &amp; Πληροφορίες</a> ·
+    Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994) ·
+    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">Πλατφόρμα ΗΕΔ</a></p>
+  </div>
+  <p style="margin-top:14px;opacity:.6">&copy; 2026 · Ενημερώθηκε 13/09/2026 18:16</p>
+</footer>
+
+</body>
+</html>

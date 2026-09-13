@@ -30,6 +30,8 @@ cp "$TMP/docs/index.html" docs/index.html
 if [ -f "$TMP/docs/CNAME" ]; then cp "$TMP/docs/CNAME" docs/CNAME; else rm -f docs/CNAME; fi
 cp "$TMP/docs/.nojekyll" docs/.nojekyll
 cp "$TMP/docs/robots.txt" docs/robots.txt
+cp "$TMP/docs/melos.html" docs/melos.html
+cp "$TMP/docs/nomika.html" docs/nomika.html
 cp "$TMP/ops/inventario.csv" ops/inventario.csv
 echo "         docs/index.html  ($(wc -c < docs/index.html) bytes)"
 echo "         ops/inventario.csv"
