@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /
+Sitemap: https://neopram.github.io/royalwellness/sitemap.xml

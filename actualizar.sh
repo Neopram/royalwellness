@@ -38,6 +38,7 @@ cp "$TMP/docs/kratisi.html" docs/kratisi.html
 cp "$TMP/docs/eukairia.html" docs/eukairia.html
 cp "$TMP/docs/manifest.json" docs/manifest.json
 cp "$TMP/docs/404.html" docs/404.html
+cp "$TMP/docs/sw.js" docs/sw.js
 if [ -f "$TMP/docs/sitemap.xml" ]; then cp "$TMP/docs/sitemap.xml" docs/sitemap.xml; fi
 cp "$TMP/ops/inventario.csv" ops/inventario.csv
 echo "         docs/index.html  ($(wc -c < docs/index.html) bytes)"

@@ -377,6 +377,7 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 <link rel="manifest" href="manifest.json">
 <style>{CSS}</style>
 </head>
@@ -404,6 +405,7 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
   <p style="margin-top:14px;opacity:.6">&copy; {datetime.now().year} · Ενημερώθηκε {datetime.now().strftime("%d/%m/%Y %H:%M")}</p>
 </footer>
 {extra_js}
+<script>if("serviceWorker"in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{{}})</script>
 </body>
 </html>
 """
@@ -1234,24 +1236,32 @@ def construir(data):
 
     import json as _j
     _mf = {"name": data["tienda"]["nombre"], "short_name": "Royal Wellness",
-           "start_url": "./index.html", "display": "standalone",
+           "start_url": "./index.html", "scope": "./",
+           "display": "standalone", "orientation": "portrait-primary",
            "background_color": "#f8f6f2", "theme_color": "#5a7356",
-           "icons": [{"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
-                     {"src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png"}]}
+           "categories": ["shopping", "health", "lifestyle"],
+           "lang": "el",
+           "icons": [{"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png",
+                      "purpose": "any maskable"},
+                     {"src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png",
+                      "purpose": "any maskable"}]}
     (SITE / "manifest.json").write_text(_j.dumps(_mf, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    _base = ("https://" + t["dominio"] if t.get("cname_activo")
+             else "https://neopram.github.io/royalwellness")
 
     # Mientras la tienda no este lista (precios sin verificar, telefono falso,
     # sin GEMI), se bloquea la indexacion.
     (SITE / "robots.txt").write_text(
-        "User-agent: *\n" + ("Allow: /\n" if t.get("indexable") else "Disallow: /\n"),
+        "User-agent: *\n"
+        + ("Allow: /\n" if t.get("indexable") else "Disallow: /\n")
+        + f"Sitemap: {_base}/sitemap.xml\n",
         encoding="utf-8")
 
     # 404 page (GitHub Pages serves this for missing routes)
     (SITE / "404.html").write_text(pagina_404(data), encoding="utf-8")
 
     # sitemap.xml (only useful once indexable, but generated always)
-    _base = ("https://" + t["dominio"] if t.get("cname_activo")
-             else "https://neopram.github.io/royalwellness")
     _pages = ["index.html", "kratisi.html", "melos.html",
               "eukairia.html", "faq.html", "epikoinonia.html", "nomika.html"]
     _sm = ['<?xml version="1.0" encoding="UTF-8"?>',
@@ -1259,6 +1269,37 @@ def construir(data):
     _sm += [f'  <url><loc>{_base}/{p}</loc></url>' for p in _pages]
     _sm.append('</urlset>')
     (SITE / "sitemap.xml").write_text("\n".join(_sm) + "\n", encoding="utf-8")
+
+    # Service worker for PWA offline support
+    _sw_pages = [
+        "./", "./index.html", "./kratisi.html", "./melos.html",
+        "./eukairia.html", "./faq.html", "./epikoinonia.html",
+        "./nomika.html", "./manifest.json"
+    ]
+    _sw_ver = datetime.now().strftime("%Y%m%d")
+    _sw_cache = f"rw-{_sw_ver}"
+    _sw_code = f"""const CACHE='{_sw_cache}';
+const URLS={_j.dumps(_sw_pages)};
+self.addEventListener('install',e=>{{
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS)));
+  self.skipWaiting();
+}});
+self.addEventListener('activate',e=>{{
+  e.waitUntil(caches.keys().then(ks=>Promise.all(
+    ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
+  self.clients.claim();
+}});
+self.addEventListener('fetch',e=>{{
+  if(e.request.method!=='GET')return;
+  e.respondWith(caches.open(CACHE).then(cache=>{{
+    return cache.match(e.request).then(hit=>{{
+      const net=fetch(e.request).then(r=>{{if(r.status===200)cache.put(e.request,r.clone());return r;}}).catch(()=>hit);
+      return hit||net;
+    }});
+  }}));
+}});
+"""
+    (SITE / "sw.js").write_text(_sw_code, encoding="utf-8")
 
     # CNAME solo cuando el DNS ya existe: si se activa antes, GitHub redirige
     # <usuario>.github.io al dominio que aun no resuelve y todo queda inaccesible.
