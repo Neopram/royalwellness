@@ -346,6 +346,17 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
     noindex = ("" if t.get("indexable")
                else '\n<meta name="robots" content="noindex,nofollow">')
     gemi = html.escape(str(t.get("gemi") or "—"))
+    _og_base = ("https://" + t["dominio"] if t.get("cname_activo")
+               else "https://neopram.github.io/royalwellness")
+    _pmap = {"tienda": "index.html", "kratisi": "kratisi.html",
+             "melos": "melos.html", "eukairia": "eukairia.html",
+             "faq": "faq.html", "contacto": "epikoinonia.html",
+             "legal": "nomika.html"}
+    _og_url   = _og_base + "/" + _pmap.get(activa, "index.html")
+    _og_img   = _og_base + "/assets/icon-512.png"
+    _og_title = html.escape(titulo)
+    _og_desc  = html.escape(desc)
+    _og_name  = html.escape(t["nombre"])
     return f"""<!doctype html>
 <html lang="el">
 <head>
@@ -353,6 +364,15 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(titulo)}</title>
 <meta name="description" content="{html.escape(desc)}">{noindex}
+<meta property="og:title" content="{_og_title}">
+<meta property="og:description" content="{_og_desc}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{_og_name}">
+<meta property="og:locale" content="el_GR">
+<meta property="og:image" content="{_og_img}">
+<meta property="og:url" content="{_og_url}">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="{_og_url}">
 <meta name="theme-color" content="#f8f6f2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1178,6 +1198,24 @@ def pagina_kratisi(data):
                  "kratisi", cuerpo)
 
 
+def pagina_404(data):
+    t = data["tienda"]
+    cuerpo = """
+<div class="wrap" style="text-align:center;padding:80px 20px 120px">
+  <p style="font-size:96px;margin:0;line-height:1;color:var(--g)">404</p>
+  <h2 style="margin:8px 0 12px">Η σελίδα δεν βρέθηκε</h2>
+  <p style="max-width:420px;margin:0 auto 28px;color:#666">
+    Η σελίδα που ζητήσατε δεν υπάρχει ή έχει μετακινηθεί.
+    Χρησιμοποιήστε τον πλοηγό παραπάνω ή επιστρέψτε στον κατάλογο.
+  </p>
+  <a href="index.html" class="btn">← Πίσω στον κατάλογο</a>
+</div>
+"""
+    return shell(t, "404 – Σελίδα δεν βρέθηκε | " + t["nombre"],
+                 "Η σελίδα δεν βρέθηκε.",
+                 "tienda", cuerpo)
+
+
 def construir(data):
     t = data["tienda"]
     # el pie necesita saber que metodos de pago hay activos
@@ -1207,6 +1245,20 @@ def construir(data):
     (SITE / "robots.txt").write_text(
         "User-agent: *\n" + ("Allow: /\n" if t.get("indexable") else "Disallow: /\n"),
         encoding="utf-8")
+
+    # 404 page (GitHub Pages serves this for missing routes)
+    (SITE / "404.html").write_text(pagina_404(data), encoding="utf-8")
+
+    # sitemap.xml (only useful once indexable, but generated always)
+    _base = ("https://" + t["dominio"] if t.get("cname_activo")
+             else "https://neopram.github.io/royalwellness")
+    _pages = ["index.html", "kratisi.html", "melos.html",
+              "eukairia.html", "faq.html", "epikoinonia.html", "nomika.html"]
+    _sm = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    _sm += [f'  <url><loc>{_base}/{p}</loc></url>' for p in _pages]
+    _sm.append('</urlset>')
+    (SITE / "sitemap.xml").write_text("\n".join(_sm) + "\n", encoding="utf-8")
 
     # CNAME solo cuando el DNS ya existe: si se activa antes, GitHub redirige
     # <usuario>.github.io al dominio que aun no resuelve y todo queda inaccesible.
