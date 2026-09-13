@@ -357,6 +357,11 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
     _og_title = html.escape(titulo)
     _og_desc  = html.escape(desc)
     _og_name  = html.escape(t["nombre"])
+    _faq  = t.get("_faq", [])
+    _faq_js = json.dumps([{"q": f["q"], "a": f["a"]} for f in _faq],
+                         ensure_ascii=False, separators=(",", ":"))
+    _wa_num = str(t.get("telefono_whatsapp", "") or "")
+    _wa_href = ("https://wa.me/" + _wa_num) if (_wa_num and "PENDIENTE" not in _wa_num and "XXXXXXXXXX" not in _wa_num) else "#"
     return f"""<!doctype html>
 <html lang="el">
 <head>
@@ -404,6 +409,93 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
   </div>
   <p style="margin-top:14px;opacity:.6">&copy; {datetime.now().year} · Ενημερώθηκε {datetime.now().strftime("%d/%m/%Y %H:%M")}</p>
 </footer>
+
+<style>
+#cw-btn{{position:fixed;bottom:22px;right:22px;width:52px;height:52px;background:var(--g);color:#fff;border-radius:50%;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 14px rgba(90,115,86,.45);z-index:1001;display:flex;align-items:center;justify-content:center;transition:transform .15s}}
+#cw-btn:hover{{transform:scale(1.09)}}
+#cw-panel{{position:fixed;bottom:84px;right:22px;width:320px;max-height:460px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);display:flex;flex-direction:column;z-index:1000;overflow:hidden}}
+#cw-head{{background:var(--g);color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px}}
+#cw-x{{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0;line-height:1}}
+#cw-msgs{{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:120px}}
+.cw-b,.cw-u{{max-width:85%;padding:9px 12px;border-radius:12px;font-size:13.5px;line-height:1.45}}
+.cw-b{{background:var(--bg);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:4px}}
+.cw-u{{background:var(--g);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}}
+.cw-b a{{color:var(--g);font-weight:600}}
+#cw-chips{{display:flex;flex-wrap:wrap;gap:6px;padding:0 10px 8px}}
+.cw-chip{{background:var(--bg);border:1px solid var(--g);color:var(--g);border-radius:20px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap}}
+.cw-chip:hover{{background:var(--g);color:#fff}}
+#cw-bar{{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--line)}}
+#cw-in{{flex:1;border:1px solid var(--line);border-radius:20px;padding:8px 13px;font-size:13.5px;background:var(--bg);color:var(--ink);outline:none}}
+#cw-in:focus{{border-color:var(--g)}}
+#cw-go{{background:var(--g);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;flex-shrink:0}}
+@media(max-width:380px){{#cw-panel{{width:calc(100vw - 20px);right:10px}}}}
+</style>
+<button id="cw-btn" aria-label="Βοήθεια">💬</button>
+<div id="cw-panel" hidden>
+  <div id="cw-head">Royal Wellness — Βοήθεια<button id="cw-x">×</button></div>
+  <div id="cw-msgs"></div>
+  <div id="cw-chips">
+    <button class="cw-chip">Αποστολή</button>
+    <button class="cw-chip">Επιστροφές</button>
+    <button class="cw-chip">Γίνε Μέλος</button>
+    <button class="cw-chip">Παραγγελία</button>
+  </div>
+  <div id="cw-bar">
+    <input id="cw-in" type="text" placeholder="Ρώτα κάτι…" autocomplete="off">
+    <button id="cw-go">→</button>
+  </div>
+</div>
+<script>
+(function(){{
+var FAQ={_faq_js};
+var WA="{_wa_href}";
+var btn=document.getElementById("cw-btn");
+var panel=document.getElementById("cw-panel");
+var msgs=document.getElementById("cw-msgs");
+var inp=document.getElementById("cw-in");
+function norm(s){{return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}}
+function findAnswer(q){{
+  var nq=norm(q);
+  var best=null,top=0;
+  for(var i=0;i<FAQ.length;i++){{
+    var words=norm(FAQ[i].q).split(/\s+/);
+    var sc=0;
+    words.forEach(function(w){{if(w.length>2&&nq.indexOf(w)>=0)sc++;}});
+    if(sc>top){{top=sc;best=FAQ[i];}}
+  }}
+  return top>0?best.a:null;
+}}
+function addMsg(html,cls){{
+  var d=document.createElement("div");
+  d.className=cls;
+  d.innerHTML=html;
+  msgs.appendChild(d);
+  msgs.scrollTop=msgs.scrollHeight;
+}}
+function send(q){{
+  q=q.trim();if(!q)return;
+  addMsg(q,"cw-u");
+  inp.value="";
+  var a=findAnswer(q);
+  setTimeout(function(){{
+    addMsg(a||(WA!="#"?'Δεν βρήκα απάντηση. <a href="'+WA+'" target="_blank" rel="noopener">Γράψε μας στο WhatsApp →</a>':'Δεν βρήκα απάντηση. Επικοινώνησε μαζί μας.'),
+      "cw-b");
+  }},280);
+}}
+btn.addEventListener("click",function(){{
+  panel.hidden=!panel.hidden;
+  if(!panel.hidden&&!msgs.children.length){{
+    addMsg("Γεια! 👋 Πες μου τι θέλεις να ξέρεις — για προϊόντα, αποστολή ή παραγγελίες.","cw-b");
+  }}
+}});
+document.getElementById("cw-x").addEventListener("click",function(){{panel.hidden=true;}});
+document.getElementById("cw-go").addEventListener("click",function(){{send(inp.value);}});
+inp.addEventListener("keydown",function(e){{if(e.key==="Enter")send(inp.value);}});
+document.querySelectorAll(".cw-chip").forEach(function(c){{
+  c.addEventListener("click",function(){{send(c.textContent);}});
+}});
+}})();
+</script>
 {extra_js}
 <script>if("serviceWorker"in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{{}})</script>
 </body>
@@ -1222,6 +1314,7 @@ def construir(data):
     t = data["tienda"]
     # el pie necesita saber que metodos de pago hay activos
     t["_pago"] = data.get("pago", {})
+    t["_faq"]  = data.get("faq", [])
     SITE.mkdir(parents=True, exist_ok=True)
 
     tienda_html, n, con_foto = pagina_tienda(data)

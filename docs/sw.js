@@ -1,4 +1,4 @@
-const CACHE='rw-20260913';
+const CACHE='rw-20260914';
 const URLS=["./", "./index.html", "./kratisi.html", "./melos.html", "./eukairia.html", "./faq.html", "./epikoinonia.html", "./nomika.html", "./manifest.json"];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS)));

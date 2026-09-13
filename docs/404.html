@@ -206,8 +206,95 @@ footer a{color:var(--g)}
     <p>Δικαίωμα υπαναχώρησης 14 ημερών (Ν. 2251/1994) ·
     <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">Πλατφόρμα ΗΕΔ</a></p>
   </div>
-  <p style="margin-top:14px;opacity:.6">&copy; 2026 · Ενημερώθηκε 13/09/2026 21:01</p>
+  <p style="margin-top:14px;opacity:.6">&copy; 2026 · Ενημερώθηκε 14/09/2026 00:22</p>
 </footer>
+
+<style>
+#cw-btn{position:fixed;bottom:22px;right:22px;width:52px;height:52px;background:var(--g);color:#fff;border-radius:50%;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 14px rgba(90,115,86,.45);z-index:1001;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+#cw-btn:hover{transform:scale(1.09)}
+#cw-panel{position:fixed;bottom:84px;right:22px;width:320px;max-height:460px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);display:flex;flex-direction:column;z-index:1000;overflow:hidden}
+#cw-head{background:var(--g);color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px}
+#cw-x{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0;line-height:1}
+#cw-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:120px}
+.cw-b,.cw-u{max-width:85%;padding:9px 12px;border-radius:12px;font-size:13.5px;line-height:1.45}
+.cw-b{background:var(--bg);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:4px}
+.cw-u{background:var(--g);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.cw-b a{color:var(--g);font-weight:600}
+#cw-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 10px 8px}
+.cw-chip{background:var(--bg);border:1px solid var(--g);color:var(--g);border-radius:20px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap}
+.cw-chip:hover{background:var(--g);color:#fff}
+#cw-bar{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--line)}
+#cw-in{flex:1;border:1px solid var(--line);border-radius:20px;padding:8px 13px;font-size:13.5px;background:var(--bg);color:var(--ink);outline:none}
+#cw-in:focus{border-color:var(--g)}
+#cw-go{background:var(--g);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;flex-shrink:0}
+@media(max-width:380px){#cw-panel{width:calc(100vw - 20px);right:10px}}
+</style>
+<button id="cw-btn" aria-label="Βοήθεια">💬</button>
+<div id="cw-panel" hidden>
+  <div id="cw-head">Royal Wellness — Βοήθεια<button id="cw-x">×</button></div>
+  <div id="cw-msgs"></div>
+  <div id="cw-chips">
+    <button class="cw-chip">Αποστολή</button>
+    <button class="cw-chip">Επιστροφές</button>
+    <button class="cw-chip">Γίνε Μέλος</button>
+    <button class="cw-chip">Παραγγελία</button>
+  </div>
+  <div id="cw-bar">
+    <input id="cw-in" type="text" placeholder="Ρώτα κάτι…" autocomplete="off">
+    <button id="cw-go">→</button>
+  </div>
+</div>
+<script>
+(function(){
+var FAQ=[{"q":"Πόσο κοστίζει η αποστολή;","a":"3,50 € σε όλη την Ελλάδα. <b>Δωρεάν για παραγγελίες άνω των 60 €.</b> Η παράδοση γίνεται σε 1–3 εργάσιμες ημέρες, ανάλογα με την περιοχή."},{"q":"Πώς μπορώ να πληρώσω;","a":"Με <b>IRIS</b> (άμεση πληρωμή από την τραπεζική σου εφαρμογή, χωρίς χρέωση για εσένα), με <b>αντικαταβολή</b> στον διανομέα, με <b>τραπεζική κατάθεση</b>, ή με <b>μετρητά</b> αν είσαι στην περιοχή μας. Διάλεξε τον τρόπο μέσα στο καλάθι."},{"q":"Πώς γίνεται η παραγγελία;","a":"Διαλέγεις τα προϊόντα, πατάς «Παραγγελία» και το μήνυμα φτάνει σε εμάς στο WhatsApp ήδη γραμμένο. Απαντάμε το συντομότερο για να επιβεβαιώσουμε διαθεσιμότητα και ημερομηνία παράδοσης. <b>Δεν πληρώνεις τίποτα μέσα στο site.</b>"},{"q":"Είναι γνήσια προϊόντα Herbalife;","a":"Ναι. Προέρχονται απευθείας από τη Herbalife Nutrition μέσω του λογαριασμού μας ως Ανεξάρτητο Μέλος. Δεν αγοράζουμε από τρίτους ούτε από marketplace."},{"q":"Πόσο κρατάει ένα κουτί Formula 1;","a":"Η συσκευασία των 550g δίνει περίπου 23 δόσεις. Αν κάνεις ένα ρόφημα την ημέρα, κρατάει περίπου <b>3 εβδομάδες</b>. Αν κάνεις δύο, περίπου 11 ημέρες."},{"q":"Μπορώ να επιστρέψω ένα προϊόν;","a":"Ναι. Έχεις δικαίωμα υπαναχώρησης <b>14 ημερολογιακών ημερών</b> από την παραλαβή (Ν. 2251/1994), χωρίς να χρειάζεται να εξηγήσεις τον λόγο. Το προϊόν πρέπει να είναι σφραγισμένο και στην αρχική του συσκευασία. Δες την <a href=\"nomika.html#epistrofes\">Πολιτική Επιστροφών</a>."},{"q":"Τι είναι η μόνιμη έκπτωση Μέλους;","a":"Αν γίνεις Μέλος Herbalife, αγοράζεις απευθείας από την εταιρεία με έκπτωση <b>25% και άνω</b>, για όσο παραμένεις εγγεγραμμένος, χωρίς υποχρέωση ελάχιστης παραγγελίας. Δες τη σελίδα <a href=\"melos.html\">Γίνε Μέλος</a>."},{"q":"Πρέπει να πουλήσω κάτι για να γίνω Μέλος;","a":"Όχι. Οι περισσότεροι γίνονται Μέλη <b>μόνο για την έκπτωση</b>, για δική τους κατανάλωση. Η επαγγελματική δραστηριοποίηση είναι ξεχωριστή επιλογή και εντελώς προαιρετική."},{"q":"Τα προϊόντα αντικαθιστούν φάρμακα ή ιατρική αγωγή;","a":"<b>Όχι.</b> Είναι συμπληρώματα διατροφής. Δεν προορίζονται για τη διάγνωση, θεραπεία ή πρόληψη ασθενειών και δεν υποκαθιστούν ισορροπημένη διατροφή. Αν παίρνεις φαρμακευτική αγωγή, είσαι έγκυος ή θηλάζεις, συμβουλέψου πρώτα τον γιατρό σου."},{"q":"Θα έχω υποστήριξη μετά την αγορά;","a":"Ναι, και είναι το βασικό που μας ξεχωρίζει. Φτιάχνουμε μαζί το πρόγραμμα, το προσαρμόζουμε στη ζωή σου και κάνουμε εβδομαδιαία παρακολούθηση. Δεν σου στέλνουμε απλώς ένα κουτί."},{"q":"Πού βρίσκεται η παραγγελία μου;","a":"Μόλις σταλεί, σου στέλνουμε τον αριθμό αποστολής στο WhatsApp. Μπορείς να τον παρακολουθήσεις στη σελίδα <a href=\"epikoinonia.html#tracking\">Παρακολούθηση Παραγγελίας</a>."},{"q":"Συλλέγετε τα προσωπικά μου δεδομένα;","a":"Μόνο όσα χρειάζονται για να σου στείλουμε την παραγγελία. Αυτό το site <b>δεν χρησιμοποιεί cookies παρακολούθησης</b> ούτε εργαλεία αναλυτικών. Δες την <a href=\"nomika.html#aporrito\">Πολιτική Απορρήτου</a>."},{"q":"Τι κάνω αν λάβω ένα χαλασμένο προϊόν;","a":"Αν ένα προϊόν φτάσει χαλασμένο, έχετε δικαίωμα επιστροφής ή ανταλλαγής εντός 14 ημερών (Ν. 2251/1994). Η ζημιά πρέπει να αναφερθεί <b>εντός 24 ωρών</b> από την παραλαβή. Επικοινωνήστε μαζί μας αμέσως με φωτογραφίες του προβλήματος για γρήγορη επίλυση."},{"q":"Παραδίδετε έξω από την Αθήνα;","a":"Ναι, αποστέλλουμε σε <b>ολόκληρη την Ελλάδα</b>, νησιά συμπεριλαμβανομένων. Οι παραγγελίες παραδίδονται σε 1–3 εργάσιμες ημέρες. Μπορείτε να παραγγείλετε από οπουδήποτε."},{"q":"Πόσο γρήγορα θα δω αποτελέσματα;","a":"Τα αποτελέσματα διαφέρουν ανά άτομο και εξαρτώνται κυρίως από τη <b>συνέπεια</b>, τη διατροφή και τον τρόπο ζωής. Συνιστούμε τουλάχιστον <b>4–6 εβδομάδες</b> συνεχούς χρήσης για να παρατηρήσετε σημαντικές αλλαγές. Η κανονικότητα είναι το κλειδί."},{"q":"Είναι ασφαλή τα προϊόντα για έγκυες ή θηλάζουσες;","a":"<b>Συμβουλευτείτε πρώτα τον γιατρό ή τη μαία σας</b> πριν χρησιμοποιήσετε οποιοδήποτε συμπλήρωμα κατά την εγκυμοσύνη ή τη θήλαση. Δεν συνιστούμε χωρίς ιατρική γνωμάτευση."},{"q":"Ποια η διαφορά Μέλους και απλού πελάτη;","a":"Ο <b>απλός πελάτης</b> αγοράζει από εμάς στη λιανική τιμή. Το <b>Μέλος Herbalife</b> αγοράζει απευθείας από την εταιρεία με έκπτωση 25–50% από την πρώτη εγγραφή, για πάντα, χωρίς υποχρέωση ελάχιστης παραγγελίας. Δες τη σελίδα <a href=\"melos.html\">Γίνε Μέλος</a>."},{"q":"Υπάρχει ελάχιστο ποσό παραγγελίας;","a":"Όχι, δεν υπάρχει ελάχιστο. Μπορείτε να αγοράσετε ένα μόνο προϊόν. Ωστόσο, <b>η αποστολή είναι δωρεάν για παραγγελίες άνω των 60 €</b> σε όλη την Ελλάδα."},{"q":"Μπορώ να αναμίξω γεύσεις και προϊόντα σε μια παραγγελία;","a":"Ναι, φυσικά. Απλώς <b>πρόσθεσε κάθε προϊόν ξεχωριστά</b> στο καλάθι με τη γεύση και την ποσότητα που θέλεις. Ολόκληρη η παραγγελία αποστέλλεται μαζί."},{"q":"Πώς ξέρω ποιο προϊόν είναι κατάλληλο για μένα;","a":"Προσφέρουμε <b>δωρεάν προσωπική συμβουλευτική</b> πριν την αγορά. Επικοινώνησε μαζί μας μέσω WhatsApp, πες μας τους στόχους σου και θα σε βοηθήσουμε να επιλέξεις. Δεν χρειάζεται να αγοράσεις τίποτα για να ρωτήσεις."}];
+var WA="#";
+var btn=document.getElementById("cw-btn");
+var panel=document.getElementById("cw-panel");
+var msgs=document.getElementById("cw-msgs");
+var inp=document.getElementById("cw-in");
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
+function findAnswer(q){
+  var nq=norm(q);
+  var best=null,top=0;
+  for(var i=0;i<FAQ.length;i++){
+    var words=norm(FAQ[i].q).split(/\s+/);
+    var sc=0;
+    words.forEach(function(w){if(w.length>2&&nq.indexOf(w)>=0)sc++;});
+    if(sc>top){top=sc;best=FAQ[i];}
+  }
+  return top>0?best.a:null;
+}
+function addMsg(html,cls){
+  var d=document.createElement("div");
+  d.className=cls;
+  d.innerHTML=html;
+  msgs.appendChild(d);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function send(q){
+  q=q.trim();if(!q)return;
+  addMsg(q,"cw-u");
+  inp.value="";
+  var a=findAnswer(q);
+  setTimeout(function(){
+    addMsg(a||(WA!="#"?'Δεν βρήκα απάντηση. <a href="'+WA+'" target="_blank" rel="noopener">Γράψε μας στο WhatsApp →</a>':'Δεν βρήκα απάντηση. Επικοινώνησε μαζί μας.'),
+      "cw-b");
+  },280);
+}
+btn.addEventListener("click",function(){
+  panel.hidden=!panel.hidden;
+  if(!panel.hidden&&!msgs.children.length){
+    addMsg("Γεια! 👋 Πες μου τι θέλεις να ξέρεις — για προϊόντα, αποστολή ή παραγγελίες.","cw-b");
+  }
+});
+document.getElementById("cw-x").addEventListener("click",function(){panel.hidden=true;});
+document.getElementById("cw-go").addEventListener("click",function(){send(inp.value);});
+inp.addEventListener("keydown",function(e){if(e.key==="Enter")send(inp.value);});
+document.querySelectorAll(".cw-chip").forEach(function(c){
+  c.addEventListener("click",function(){send(c.textContent);});
+});
+})();
+</script>
 
 <script>if("serviceWorker"in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{})</script>
 </body>
