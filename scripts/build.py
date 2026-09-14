@@ -363,6 +363,7 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
                          ensure_ascii=False, separators=(",", ":"))
     _wa_num = str(t.get("telefono_whatsapp", "") or "")
     _wa_href = ("https://wa.me/" + _wa_num) if (_wa_num and "PENDIENTE" not in _wa_num and "XXXXXXXXXX" not in _wa_num) else "#"
+    _ai_url = str(t.get("chat_ai_url", "") or "")
     return f"""<!doctype html>
 <html lang="el">
 <head>
@@ -451,6 +452,7 @@ def shell(t, titulo, desc, activa, cuerpo, extra_js=""):
 (function(){{
 var FAQ={_faq_js};
 var WA="{_wa_href}";
+var AI="{_ai_url}";
 var btn=document.getElementById("cw-btn");
 var panel=document.getElementById("cw-panel");
 var msgs=document.getElementById("cw-msgs");
@@ -474,15 +476,37 @@ function addMsg(html,cls){{
   msgs.appendChild(d);
   msgs.scrollTop=msgs.scrollHeight;
 }}
+function fallbackMsg(){{
+  return WA!="#"?'Δεν βρήκα απάντηση. <a href="'+WA+'" target="_blank" rel="noopener">Γράψε μας στο WhatsApp →</a>':'Δεν βρήκα απάντηση. Επικοινώνησε μαζί μας.';
+}}
 function send(q){{
   q=q.trim();if(!q)return;
   addMsg(q,"cw-u");
   inp.value="";
   var a=findAnswer(q);
-  setTimeout(function(){{
-    addMsg(a||(WA!="#"?'Δεν βρήκα απάντηση. <a href="'+WA+'" target="_blank" rel="noopener">Γράψε μας στο WhatsApp →</a>':'Δεν βρήκα απάντηση. Επικοινώνησε μαζί μας.'),
-      "cw-b");
-  }},280);
+  if(a){{
+    setTimeout(function(){{addMsg(a,"cw-b");}},280);
+    return;
+  }}
+  if(!AI){{
+    setTimeout(function(){{addMsg(fallbackMsg(),"cw-b");}},280);
+    return;
+  }}
+  var typing=document.createElement("div");
+  typing.className="cw-b";
+  typing.textContent="…";
+  msgs.appendChild(typing);
+  msgs.scrollTop=msgs.scrollHeight;
+  fetch(AI,{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{question:q}})}})
+    .then(function(r){{return r.json();}})
+    .then(function(data){{
+      typing.remove();
+      addMsg(data&&data.answer?data.answer:fallbackMsg(),"cw-b");
+    }})
+    .catch(function(){{
+      typing.remove();
+      addMsg(fallbackMsg(),"cw-b");
+    }});
 }}
 btn.addEventListener("click",function(){{
   panel.hidden=!panel.hidden;

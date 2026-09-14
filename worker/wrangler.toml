@@ -1,0 +1,10 @@
+name = "royalwellness-chatbot"
+main = "chatbot-worker.js"
+compatibility_date = "2026-01-01"
+
+# Namespace KV para rate limiting (12 preguntas/hora/IP).
+# Crear con: npx wrangler kv namespace create RATE_LIMIT
+# y pegar aquí el "id" que te devuelva.
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "PEGAR_AQUI_EL_ID_DEL_KV_NAMESPACE"

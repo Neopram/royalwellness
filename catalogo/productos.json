@@ -28,6 +28,8 @@
     "horario": "Δευτέρα έως Κυριακή, 9:00 — 21:00",
     "tiktok": "",
     "facebook": "",
+    "chat_ai_url": "",
+    "_chat_ai_url": "URL del Cloudflare Worker (ver worker/README.md). Vacio = el chatbot solo usa el FAQ + WhatsApp, sin IA. Rellenar tras desplegar el Worker.",
     "modo_catalogo": true,
     "_modo_catalogo": "true = se ignora el stock y todo se muestra disponible (pides a Herbalife por encargo). false = se respeta el campo stock y lo que este a 0 sale como agotado."
   },
